@@ -1,7 +1,7 @@
 public class Driver {
     private String name;
     private String driversLicense;
-    private int phoneNumber;
+    private double phoneNumber;
 
     public void setName(String n) {
         name = n;
@@ -11,7 +11,7 @@ public class Driver {
         driversLicense = dl;
     }
 
-    public void setPhoneNumber(int pN) {
+    public void setPhoneNumber(double pN) {
         phoneNumber = pN;
     }
 
