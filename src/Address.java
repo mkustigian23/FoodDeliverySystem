@@ -1,9 +1,15 @@
 public class Address {
     private String streetName;
-    private double streetNum;
+
+    private String city;
+
+    private String state;
+
     private String bulidingType;
-    private double Apt;
     private String buildingName;
+
+    private double Apt;
+    private double streetNum;
 
     public String getStreetName() {
         return streetName;
@@ -25,6 +31,14 @@ public class Address {
         return buildingName;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
@@ -44,4 +58,16 @@ public class Address {
     public void setBuildingName(String buildingName) {
         this.buildingName = buildingName;
     }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 }
+
+
+
+
