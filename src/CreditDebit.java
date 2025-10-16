@@ -5,6 +5,8 @@ public class CreditDebit {
         private double CVV;
         private double expDate;
 
+        private String country;
+
         private double zipCode;
 
 
@@ -41,14 +43,17 @@ public class CreditDebit {
         }
 
         public void setZipCode(double zipCode) {
-        this.zipCode = zipCode;
+            this.zipCode = zipCode;
         }
 
         public double getZipCode() {
-        return zipCode;
+            return zipCode;
+    }
+        public void setCountry(String country) {
+            this.country = country;
     }
 
-
-
-
+        public String getCountry() {
+            return country;
+    }
 }
