@@ -5,6 +5,8 @@ public class CreditDebit {
         private double CVV;
         private double expDate;
 
+        private double zipCode;
+
 
         public double getName() {
             return Name;
@@ -37,4 +39,16 @@ public class CreditDebit {
         public void setExpDate(double expDate) {
             this.expDate = expDate;
         }
+
+        public void setZipCode(double zipCode) {
+        this.zipCode = zipCode;
+        }
+
+        public double getZipCode() {
+        return zipCode;
+    }
+
+
+
+
 }
