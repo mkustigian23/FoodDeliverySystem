@@ -1,15 +1,26 @@
 public class Restaurant {
-<<<<<<< HEAD
     private String name;
     private String[] menuItems;
-
-
-=======
-
-    private String name;
     private String address;
-    private String[] menu;
     private int prices;
->>>>>>> 7409eeae53b701e3ce2ac48f3eb376a9c0a6b00f
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public void setAddress (String a) {
+        address = a;
+    }
+
+    public void setPrices (int p) {
+        prices = p;
+    }
+
+    public void setMenuItems(String[] mI) {
+        menuItems = new String[mI.length];
+        for (int i = 0; i < mI.length; i++) {
+            menuItems[i] = mI[i];
+        }
+    }
 
 }
