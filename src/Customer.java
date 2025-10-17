@@ -1,4 +1,4 @@
-public class Customer {
+public class Customer{
     private String name;
     private String address;
     private int phoneNumber;
@@ -24,6 +24,10 @@ public class Customer {
     }
     public int getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String[] getFavoriteItems() {
+        return favoriteItems;
     }
 
     public void setFavoriteItems(String[] fI) {
