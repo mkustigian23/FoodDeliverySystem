@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,5 +41,36 @@ public class Main {
         r3.displayMenu();
         r4.displayMenu();
         r5.displayMenu();
+
+        // adding + removing items
+        Scanner input = new Scanner(System.in);
+        r1.addItems(input);     // add items
+        r1.removeItems(input); // remove items
+        r1.displayMenu();
+
+        r2.addItems(input);     // add items
+        r2.removeItems(input); // remove items
+        r2.displayMenu();
+
+        r3.addItems(input);     // add items
+        r3.removeItems(input); // remove items
+        r3.displayMenu();
+
+        r4.addItems(input);     // add items
+        r4.removeItems(input); // remove items
+        r4.displayMenu();
+
+        r5.addItems(input);     // add items
+        r5.removeItems(input); // remove items
+        input.close();
+
+        // Final Display of new menu
+        r1.displayMenu();
+        r2.displayMenu();
+        r3.displayMenu();
+        r4.displayMenu();
+        r5.displayMenu();
+
     }
+
 }
