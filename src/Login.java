@@ -1,44 +1,37 @@
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.Label;
+
 
 public class Login {
-    private int phoneNum;
-    private String email;
-    private String username;
-    private String password;
-    private String accType;
+    JLabel usernameLabel = new JLabel("Username:");
+    JLabel passwordLabel = new JLabel("Password:");
+    JPasswordField passwordField = new JPasswordField();
+    JButton loginButton = new JButton("Login");
 
-    public void loginInfo(){
-        System.out.println("Insert User Info");
+    public void setLayout(new FlowLayout()){
+
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void add(usernameLabel) {
+        this.
     }
-    public String getUsername(){
-        return username;
+
+    add(usernameField);
+
+    public void add(passwordLabel) {
+
     }
-    public void setPassword(String password){
-        this.password = password;
-    }
-    public String getPassword(){
-        return password;
-    }
-    public void setEmail(String email){
-        this.email = email;
-    }
-    public String getEmail(){
-        return email;
-    }
-    public void setPhoneNum(int phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-    public int getPhoneNum() {
-        return phoneNum;
-    }
-    public void setAccType(String accType) {
-        this.accType = accType;
-    }
-    public String getAccType() {
-        return accType;
+
+    add(passwordField);
+
+    void add(loginButton);
+
+        loginButton.addActionListener(e ->)
+
+    {
+        Label usernameField = new Label();
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
     }
 }
