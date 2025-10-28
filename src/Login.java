@@ -1,37 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Label;
+import java.awt.event.*;
 
 
 public class Login {
-    JLabel usernameLabel = new JLabel("Username:");
-    JLabel passwordLabel = new JLabel("Password:");
-    JPasswordField passwordField = new JPasswordField();
-    JButton loginButton = new JButton("Login");
+    private JLabel usernameLabel = new JLabel("Username:");
+    private JLabel passwordLabel = new JLabel("Password:");
+    private JLabel DOB = new JLabel("DOB");
+    private JLabel months = new JLabel("Month");
+    private JTextField passwordField = new JTextField();
+    private JTextField usernameField =  new JTextField();
+    private JTextField DOBField = new JTextField();
+    private JButton loginButton = new JButton("Login");
 
-    public void setLayout(new FlowLayout()){
 
-    }
-
-    public void add(usernameLabel) {
-        this.
-    }
-
-    add(usernameField);
-
-    public void add(passwordLabel) {
-
-    }
-
-    add(passwordField);
-
-    void add(loginButton);
-
-        loginButton.addActionListener(e ->)
-
-    {
-        Label usernameField = new Label();
-        String username = usernameField.getText();
-        String password = new String(passwordField.getPassword());
-    }
 }
