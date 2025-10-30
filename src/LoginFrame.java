@@ -2,10 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class LoginFrame
-        extends JFrame
-        implements ActionListener {
-
+class LoginFrame extends JFrame implements ActionListener {
     // methods of the Frame
     private Container c;
     private JLabel title;

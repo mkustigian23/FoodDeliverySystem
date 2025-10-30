@@ -1,14 +1,6 @@
 
 public class Main {
 
-    class Login {
-
-        public static void main(String[] args) throws Exception
-        {
-             new LoginFrame();
-        }
-    }
-
     public static void main(String[] args) {
         try {
             // Initialize DAOs
@@ -46,3 +38,11 @@ public class Main {
         }
     }
 }
+
+class Login {
+
+public static void main(String[] args) throws Exception
+{
+    new LoginFrame();
+}
+    }
