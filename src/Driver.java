@@ -1,19 +1,22 @@
+
 public class Driver {
+    private int id;
     private String name;
-    private String driversLicense;
-    private double phoneNumber;
+    private String licenseNumber;
 
-    public void setName(String n) {
-        name = n;
+    public Driver(int id, String name, String licenseNumber) {
+        this.id = id;
+        this.name = name;
+        this.licenseNumber = licenseNumber;
     }
 
-    public void setDriversLicense(String dl) {
-        driversLicense = dl;
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public String getLicenseNumber() { return licenseNumber; }
+
+    @Override
+    public String toString() {
+        return "Driver[" + id + "] " + name + " - License: " + licenseNumber;
     }
-
-    public void setPhoneNumber(double pN) {
-        phoneNumber = pN;
-    }
-
-
 }
+

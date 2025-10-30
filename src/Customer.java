@@ -1,46 +1,23 @@
-public class Customer{
+
+
+public class Customer {
+    private int id;
     private String name;
-    private String address;
-    private int phoneNumber;
-    private String[] favoriteItems;
-    private int creditCard;
+    private String email;
 
-
-    public void setName(String n) {
-        name = n;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setAddress(String a) {
-        address = a;
-    }
-    public String getAddress() {
-        return address;
+    public Customer(int id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
 
-    public void setPhoneNumber(int pN) {
-        phoneNumber = pN;
-    }
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
+    // Getters
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
 
-    public String[] getFavoriteItems() {
-        return favoriteItems;
-    }
-
-    public void setFavoriteItems(String[] fI) {
-        favoriteItems = new String[fI.length];
-        for (int i = 0; i < fI.length; i++) {
-            favoriteItems[i] = fI[i];
-        }
-    }
-
-    public void setCreditCard(int cC) {
-        creditCard = cC;
-    }
-    public int getCreditCard() {
-        return creditCard;
+    @Override
+    public String toString() {
+        return "Customer[" + id + "] " + name + " - " + email;
     }
 }

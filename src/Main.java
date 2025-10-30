@@ -1,76 +1,39 @@
-import java.util.HashMap;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        HashMap<String, Double> BridgeMart = new HashMap<>();
-        BridgeMart.put("Bacon Egg and Cheese", 8.99);
-        BridgeMart.put("Chicken Club", 9.49);
-        BridgeMart.put("Salad", 6.99);
+        try {
+            // Initialize DAOs
+            CustomerDAO customerDAO = new CustomerDAO();
+            DriverDAO driverDAO = new DriverDAO();
+            RestaurantDAO restaurantDAO = new RestaurantDAO();
 
-        HashMap<String, Double> BearsDen = new HashMap<>();
-        BearsDen.put("California Roll", 7.99);
-        BearsDen.put("Chicken Tacos", 9.49);
-        BearsDen.put("Hamburger", 5.99);
+            // Create tables
+            customerDAO.createTable();
+            driverDAO.createTable();
+            restaurantDAO.createTable();
 
-        HashMap<String, Double> CrimsonDining = new HashMap<>();
-        CrimsonDining.put("Cheeseburger", 7.99);
-        CrimsonDining.put("Ice cream", 5.49);
-        CrimsonDining.put("Pizza Slice", 4.49);
+            // Insert sample data
+            customerDAO.insert("Alice", "alice@example.com");
+            customerDAO.insert("Bob", "bob@example.com");
 
-        HashMap<String, Double> Greyhound = new HashMap<>();
-        Greyhound.put("Adult Beverage", 2.99);
-        Greyhound.put("Quesadilla", 10.49);
-        Greyhound.put("Chips & Salsa", 5.29);
+            driverDAO.insert("John Doe", "D12345");
+            driverDAO.insert("Jane Smith", "D54321");
 
-        HashMap<String, Double> Fiesta = new HashMap<>();
-        Fiesta.put("Burrito", 14.49);
-        Fiesta.put("Bowl", 14.49);
-        Fiesta.put("Tres Leches", 5.99);
+            restaurantDAO.insert("Pasta Palace", "New York");
+            restaurantDAO.insert("Burger Barn", "Chicago");
 
-        // restaurant objects
-        Restaurant r1 = new Restaurant("BridgeMart", "169 Spring St", BridgeMart);
-        Restaurant r2 = new Restaurant("Bear's Den", "67 Park Ave", BearsDen);
-        Restaurant r3 = new Restaurant("Crimson Dining", "125 Burril Ave", CrimsonDining);
-        Restaurant r4 = new Restaurant("Greyhound", "39 Broad St", Greyhound);
-        Restaurant r5 = new Restaurant("Fiesta", "16 Central Sq", Fiesta);
+            // Display all data
+            System.out.println("=== Customers ===");
+            customerDAO.getAll().forEach(System.out::println);
 
-        //  Display their menus
-        r1.displayMenu();
-        r2.displayMenu();
-        r3.displayMenu();
-        r4.displayMenu();
-        r5.displayMenu();
+            System.out.println("\n=== Drivers ===");
+            driverDAO.getAll().forEach(System.out::println);
 
-        // adding + removing items
-        Scanner input = new Scanner(System.in);
-        r1.addItems(input);     // add items
-        r1.removeItems(input); // remove items
-        r1.displayMenu();
+            System.out.println("\n=== Restaurants ===");
+            restaurantDAO.getAll().forEach(System.out::println);
 
-        r2.addItems(input);     // add items
-        r2.removeItems(input); // remove items
-        r2.displayMenu();
-
-        r3.addItems(input);     // add items
-        r3.removeItems(input); // remove items
-        r3.displayMenu();
-
-        r4.addItems(input);     // add items
-        r4.removeItems(input); // remove items
-        r4.displayMenu();
-
-        r5.addItems(input);     // add items
-        r5.removeItems(input); // remove items
-        input.close();
-
-        // Final Display of new menu
-        r1.displayMenu();
-        r2.displayMenu();
-        r3.displayMenu();
-        r4.displayMenu();
-        r5.displayMenu();
-
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
-
 }
