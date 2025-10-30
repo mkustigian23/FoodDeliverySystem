@@ -17,8 +17,21 @@ public class CustomerDAO {
             stmt.execute(sql);
         }
     }
+    public boolean emailExists(String email) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM customers WHERE email = ?";
+        try (Connection conn = CustomerDatabase.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.getInt(1) > 0;
+        }
+    }
 
     public void insert(String name, String email) throws SQLException {
+        if (emailExists(email)) {
+            throw new SQLException("Email already exists: " + email);
+        }
+
         String sql = "INSERT INTO customers(name, email) VALUES(?, ?)";
         try (Connection conn = CustomerDatabase.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

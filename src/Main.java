@@ -1,48 +1,43 @@
 
 public class Main {
 
-    public static void main(String[] args) {
-        try {
-            // Initialize DAOs
-            CustomerDAO customerDAO = new CustomerDAO();
-            DriverDAO driverDAO = new DriverDAO();
-            RestaurantDAO restaurantDAO = new RestaurantDAO();
 
-            // Create tables
-            customerDAO.createTable();
-            driverDAO.createTable();
-            restaurantDAO.createTable();
+        public static void main(String[] args) throws Exception {
+            LoginFrame login = new LoginFrame();
+            login.setVisible(true);
+            try {
+                // Initialize DAOs
+                CustomerDAO customerDAO = new CustomerDAO();
+                DriverDAO driverDAO = new DriverDAO();
+                RestaurantDAO restaurantDAO = new RestaurantDAO();
 
-            // Insert sample data
-            customerDAO.insert("Alice", "alice@example.com");
-            customerDAO.insert("Bob", "bob@example.com");
+                // Create tables
+                customerDAO.createTable();
+                driverDAO.createTable();
+                restaurantDAO.createTable();
 
-            driverDAO.insert("John Doe", "D12345");
-            driverDAO.insert("Jane Smith", "D54321");
+                // Insert sample data
+                //customerDAO.insert("Alice", "alice@example.com");
+                //customerDAO.insert("Bob", "bob@example.com");
 
-            restaurantDAO.insert("Pasta Palace", "New York");
-            restaurantDAO.insert("Burger Barn", "Chicago");
+                //driverDAO.insert("John Doe", "D12345");
+                //driverDAO.insert("Jane Smith", "D54321");
 
-            // Display all data
-            System.out.println("=== Customers ===");
-            customerDAO.getAll().forEach(System.out::println);
+                //restaurantDAO.insert("Pasta Palace", "New York");
+                //restaurantDAO.insert("Burger Barn", "Chicago");
 
-            System.out.println("\n=== Drivers ===");
-            driverDAO.getAll().forEach(System.out::println);
+                // Display all data
+                System.out.println("=== Customers ===");
+                customerDAO.getAll().forEach(System.out::println);
 
-            System.out.println("\n=== Restaurants ===");
-            restaurantDAO.getAll().forEach(System.out::println);
+                System.out.println("\n=== Drivers ===");
+                driverDAO.getAll().forEach(System.out::println);
 
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+                System.out.println("\n=== Restaurants ===");
+                restaurantDAO.getAll().forEach(System.out::println);
+
+            } catch (Exception e) {
+                System.err.println("Error: " + e.getMessage());
+            }
         }
-    }
 }
-
-class Login {
-
-public static void main(String[] args) throws Exception
-{
-    new LoginFrame();
-}
-    }
