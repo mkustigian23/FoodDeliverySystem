@@ -55,7 +55,7 @@ class LoginFrame
     // with default values.
     public LoginFrame()
     {
-        setTitle("Login/Register");
+        setTitle("BSU Eats Delivery App");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -195,7 +195,7 @@ class LoginFrame
         resadd.setLineWrap(true);
         c.add(resadd);
 
-        setVisible(true);
+        c.setVisible(true);
     }
 
     // method actionPerformed()
