@@ -65,11 +65,11 @@ class LoginFrame
 
         title = new JLabel("Login/Register");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 30);
-        title.setLocation(300, 30);
+        title.setSize(300, 40);
+        title.setLocation(300, 40);
         c.add(title);
 
-        userName = new JLabel("Name");
+        userName = new JLabel("Username");
         userName.setFont(new Font("Arial", Font.PLAIN, 20));
         userName.setSize(100, 20);
         userName.setLocation(100, 100);
@@ -207,7 +207,7 @@ class LoginFrame
             if (terms.isSelected()) {
                 String data1;
                 String data
-                        = "Name : "
+                        = "Username : "
                         + userNameField.getText() + "\n"
                         + "Mobile : "
                         + phoneNumField.getText() + "\n";
