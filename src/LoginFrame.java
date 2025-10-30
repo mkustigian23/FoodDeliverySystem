@@ -6,7 +6,7 @@ class LoginFrame
         extends JFrame
         implements ActionListener {
 
-    // Components of the Form
+    // methods of the Frame
     private Container c;
     private JLabel title;
     private JLabel userName;
