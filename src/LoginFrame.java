@@ -247,5 +247,18 @@ class LoginFrame extends JFrame implements ActionListener {
             year.setSelectedIndex(0);
             resadd.setText(def);
         }
+
+        if (terms.isSelected()) {
+            // existing code that shows login details
+            res.setText("Login Successful..");
+
+            // ✅ Launch the PaymentFrame
+            PaymentFrame payment = new PaymentFrame();
+            payment.setVisible(true);
+
+            // close the login window
+            this.dispose();
+        }
+
     }
 }

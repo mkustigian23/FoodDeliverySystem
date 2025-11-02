@@ -4,6 +4,7 @@ public class Main {
         public static void main(String[] args) throws Exception {
             LoginFrame login = new LoginFrame();
             login.setVisible(true);
+
             try {
                 // Initialize DAOs
                 CustomerDAO customerDAO = new CustomerDAO();
@@ -38,5 +39,6 @@ public class Main {
             } catch (Exception e) {
                 System.err.println("Error: " + e.getMessage());
             }
+
         }
 }
