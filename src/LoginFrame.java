@@ -252,9 +252,8 @@ class LoginFrame extends JFrame implements ActionListener {
             // existing code that shows login details
             res.setText("Login Successful..");
 
-            // ✅ Launch the PaymentFrame
-            PaymentFrame payment = new PaymentFrame();
-            payment.setVisible(true);
+            RestaurantFrame restaurant = new RestaurantFrame();
+            restaurant.setVisible(true);
 
             // close the login window
             this.dispose();
