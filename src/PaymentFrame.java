@@ -3,7 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class PaymentFrame extends JFrame implements ActionListener {
-    private JTextField firstName, lastName, cardNumber, expiration, cvv, totalAmount;
+    private JTextField firstName;
+    private JTextField lastName;
+    private JTextField cardNumber;
+    private JTextField expiration;
+    private JTextField cvv;
+
+    private JTextField totalAmount;
+
     private JButton payButton;
     private JLabel statusLabel;
     private Payment payment;
