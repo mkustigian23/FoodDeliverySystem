@@ -8,8 +8,8 @@ class LoginFrame extends JFrame implements ActionListener {
     private JLabel title;
     private JLabel userName;
     private JTextField userNameField;
-    private JLabel phoneNum;
-    private JTextField phoneNumField;
+    private JLabel password;
+    private JTextField passwordField;
     private JLabel gender;
     private JRadioButton male;
     private JRadioButton female;
@@ -78,17 +78,17 @@ class LoginFrame extends JFrame implements ActionListener {
         userNameField.setLocation(200, 100);
         c.add(userNameField);
 
-        phoneNum = new JLabel("Mobile");
-        phoneNum.setFont(new Font("Arial", Font.PLAIN, 20));
-        phoneNum.setSize(100, 20);
-        phoneNum.setLocation(100, 150);
-        c.add(phoneNum);
+        password = new JLabel("Password");
+        password.setFont(new Font("Arial", Font.PLAIN, 20));
+        password.setSize(100, 20);
+        password.setLocation(100, 150);
+        c.add(password);
 
-        phoneNumField = new JTextField();
-        phoneNumField.setFont(new Font("Arial", Font.PLAIN, 15));
-        phoneNumField.setSize(150, 20);
-        phoneNumField.setLocation(200, 150);
-        c.add(phoneNumField);
+        passwordField = new JTextField();
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
+        passwordField.setSize(150, 20);
+        passwordField.setLocation(200, 150);
+        c.add(passwordField);
 
         gender = new JLabel("Gender");
         gender.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -200,14 +200,22 @@ class LoginFrame extends JFrame implements ActionListener {
     // by the user and act accordingly
     public void actionPerformed(ActionEvent e)
     {
+        String username = userNameField.getText();
+        String password = passwordField.getText();
+        if (Authenticator.checkLogin(username, password)) {
+            JOptionPane.showMessageDialog(null, "Login successful!");
+            // Proceed to next screen
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password");
+        }
         if (e.getSource() == submit) {
             if (terms.isSelected()) {
                 String data1;
                 String data
                         = "Username : "
                         + userNameField.getText() + "\n"
-                        + "Mobile : "
-                        + phoneNumField.getText() + "\n";
+                        + "Password : "
+                        + passwordField.getText() + "\n";
                 if (male.isSelected())
                     data1 = "Gender : Male"
                             + "\n";
@@ -238,7 +246,7 @@ class LoginFrame extends JFrame implements ActionListener {
             String def = "";
             userNameField.setText(def);
             addrssArea.setText(def);
-            phoneNumField.setText(def);
+            passwordField.setText(def);
             res.setText(def);
             tout.setText(def);
             terms.setSelected(false);

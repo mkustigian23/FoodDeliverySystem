@@ -9,40 +9,40 @@ public class DriverDAO {
             CREATE TABLE IF NOT EXISTS drivers (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
-                license_number TEXT UNIQUE NOT NULL
+                vehicle TEXT NOT NULL
             );
         """;
-        try (Connection conn = DriverDatabase.connect();
+        try (Connection conn = DatabaseManager.connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         }
     }
 
-    public void insert(String name, String license) throws SQLException {
-        String sql = "INSERT INTO drivers(name, license_number) VALUES(?, ?)";
-        try (Connection conn = DriverDatabase.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public int insert(String name, String vehicle) throws SQLException {
+        String sql = "INSERT INTO drivers(name, vehicle) VALUES(?, ?)";
+        try (Connection conn = DatabaseManager.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, name);
-            pstmt.setString(2, license);
+            pstmt.setString(2, vehicle);
             pstmt.executeUpdate();
+
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) return rs.getInt(1);
+            }
         }
+        return -1;
     }
 
-    public List<Driver> getAll() throws SQLException {
-        List<Driver> drivers = new ArrayList<>();
+    public List<String> getAll() throws SQLException {
+        List<String> list = new ArrayList<>();
         String sql = "SELECT * FROM drivers";
-        try (Connection conn = DriverDatabase.connect();
+        try (Connection conn = DatabaseManager.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                drivers.add(new Driver(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("license_number")
-                ));
+                list.add(rs.getInt("id") + ": " + rs.getString("name"));
             }
         }
-        return drivers;
+        return list;
     }
 }
-

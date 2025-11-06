@@ -33,7 +33,7 @@ public class RestaurantFrame extends JFrame {
         // Load restaurants from database
         try {
             RestaurantDAO dao = new RestaurantDAO();
-            restaurantList = new ArrayList<>(dao.getAll());
+            restaurantList = new ArrayList<>(); //dao.getAll()
             for (Restaurant r : restaurantList) {
                 restaurant.addItem(r.getName());
             }
