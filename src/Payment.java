@@ -1,4 +1,4 @@
-public class Payment {
+public class Payment extends CreditDebit{
     private int balance;
 
     public void setBalance(int b) {
