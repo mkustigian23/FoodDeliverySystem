@@ -5,6 +5,14 @@ import java.sql.SQLException;
 
 public class Authenticator {
 
+    // Authenticator class to check a user's login information and validate their identity on the LoginFrame
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public static boolean checkLogin(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
 

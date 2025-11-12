@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DriverDAO {
+
+    // Create SQLite table "drivers"
+
+    /**
+     *
+     * @throws SQLException
+     */
     public void createTable() throws SQLException {
         String sql = """
             CREATE TABLE IF NOT EXISTS drivers (
@@ -17,6 +24,16 @@ public class DriverDAO {
             stmt.execute(sql);
         }
     }
+
+    // inserting method into the table drivers, with name and vehicle
+
+    /**
+     *
+     * @param name
+     * @param vehicle
+     * @return
+     * @throws SQLException
+     */
 
     public int insert(String name, String vehicle) throws SQLException {
         String sql = "INSERT INTO drivers(name, vehicle) VALUES(?, ?)";
@@ -32,7 +49,13 @@ public class DriverDAO {
         }
         return -1;
     }
+    // Admin method to get all drivers from the SQLite table
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<String> getAll() throws SQLException {
         List<String> list = new ArrayList<>();
         String sql = "SELECT * FROM drivers";
