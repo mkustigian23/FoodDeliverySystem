@@ -13,23 +13,29 @@ public class Authenticator {
      * @param password
      * @return
      */
-    public static boolean checkLogin(String username, String password) {
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
 
-        try (Connection conn = DatabaseManager.connect();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        public static Integer checkLogin(String username, String password) {
+            String sql = "SELECT account_type FROM logins WHERE username = ? AND password = ?";
 
-            stmt.setString(1, username);
-            stmt.setString(2, password);  // In production, use hashed password
+            try (Connection conn = DatabaseManager.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            ResultSet rs = stmt.executeQuery();
-            return rs.next(); // returns true if a match is found
+                pstmt.setString(1, username);
+                pstmt.setString(2, password);
+                ResultSet rs = pstmt.executeQuery();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+                if (rs.next()) {
+                    return rs.getInt("account_type");
+                } else {
+                    return null; // invalid login
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
-}
+
 
 

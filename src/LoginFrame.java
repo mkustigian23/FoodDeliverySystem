@@ -198,74 +198,48 @@ class LoginFrame extends JFrame implements ActionListener {
     // method actionPerformed()
     // to get the action performed
     // by the user and act accordingly
-    public void actionPerformed(ActionEvent e)
-    {
+    public void actionPerformed(ActionEvent e) {
+
         String username = userNameField.getText();
         String password = passwordField.getText();
-        if (Authenticator.checkLogin(username, password)) {
+
+        // ==========================
+        //     LOGIN REDIRECTION
+        // ==========================
+        Integer accountType = Authenticator.checkLogin(username, password);
+
+        if (accountType != null) {
+
             JOptionPane.showMessageDialog(null, "Login successful!");
-            // Proceed to next screen
-        } else {
+
+            // close login window
+            this.dispose();
+
+            switch (accountType) {
+                case 0 -> {
+                    AdminFrame a = new AdminFrame();
+                    a.setVisible(true);
+                }
+                case 1 -> {
+                    //CustomerFrame c = new CustomerFrame(username);
+                    //c.setVisible(true);
+                }
+                case 2 -> {
+                    //DriverFrame d = new DriverFrame(username);
+                    //d.setVisible(true);
+                }
+                case 3 -> {
+                    RestaurantFrame r = new RestaurantFrame();
+                    r.setVisible(true);
+                }
+            }
+
+            return; // EXIT HERE so your registration code does not run after login
+        }
+        else {
             JOptionPane.showMessageDialog(null, "Invalid username or password");
         }
-        if (e.getSource() == submit) {
-            if (terms.isSelected()) {
-                String data1;
-                String data
-                        = "Username : "
-                        + userNameField.getText() + "\n"
-                        + "Password : "
-                        + passwordField.getText() + "\n";
-                if (male.isSelected())
-                    data1 = "Gender : Male"
-                            + "\n";
-                else
-                    data1 = "Gender : Female"
-                            + "\n";
-                String data2
-                        = "DOB : "
-                        + (String)date.getSelectedItem()
-                        + "/" + (String)month.getSelectedItem()
-                        + "/" + (String)year.getSelectedItem()
-                        + "\n";
 
-                String data3 = "Address : " + addrssArea.getText();
-                tout.setText(data + data1 + data2 + data3);
-                tout.setEditable(false);
-                res.setText("Login Successful..");
-            }
-            else {
-                tout.setText("");
-                resadd.setText("");
-                res.setText("Please accept the"
-                        + " terms & conditions..");
-            }
-        }
-
-        else if (e.getSource() == reset) {
-            String def = "";
-            userNameField.setText(def);
-            addrssArea.setText(def);
-            passwordField.setText(def);
-            res.setText(def);
-            tout.setText(def);
-            terms.setSelected(false);
-            date.setSelectedIndex(0);
-            month.setSelectedIndex(0);
-            year.setSelectedIndex(0);
-            resadd.setText(def);
-        }
-
-        if (terms.isSelected()) {
-            // existing code that shows login details
-            res.setText("Login Successful..");
-
-            RestaurantFrame restaurant = new RestaurantFrame();
-            restaurant.setVisible(true);
-
-            // close the login window
-            this.dispose();
-        }
 
     }
 }

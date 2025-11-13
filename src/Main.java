@@ -10,11 +10,18 @@ public class Main {
             DriverDAO driverDAO = new DriverDAO();
             RestaurantDAO restaurantDAO = new RestaurantDAO();
             DeliveryDAO deliveryDAO = new DeliveryDAO();
+            LoginDAO loginDAO = new LoginDAO();
+            HistoryDAO historyDAO = new HistoryDAO();
 
             customerDAO.createTable();
             driverDAO.createTable();
             restaurantDAO.createTable();
             deliveryDAO.createTable();
+            loginDAO.createTable();
+            historyDAO.createTable();
+            loginDAO.insertDefaultUsers();
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
