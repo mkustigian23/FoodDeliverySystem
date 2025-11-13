@@ -216,24 +216,45 @@ class AdminFrame extends JFrame implements ActionListener {
 //        tout.setEditable(false);
 //        c.add(tout);
 //
-//        res = new JLabel("");
-//        res.setFont(new Font("Arial", Font.PLAIN, 20));
-//        res.setSize(500, 25);
-//        res.setLocation(100, 500);
-//        c.add(res);
-//
-//        resadd = new JTextArea();
-//        resadd.setFont(new Font("Arial", Font.PLAIN, 15));
-//        resadd.setSize(200, 75);
-//        resadd.setLocation(580, 175);
-//        resadd.setLineWrap(true);
-//        c.add(resadd);
+        res = new JLabel("");
+        res.setFont(new Font("Arial", Font.PLAIN, 20));
+        res.setSize(500, 25);
+        res.setLocation(100, 500);
+        c.add(res);
+
+        resadd = new JTextArea();
+        resadd.setFont(new Font("Arial", Font.PLAIN, 15));
+        resadd.setSize(200, 75);
+        resadd.setLocation(580, 175);
+        resadd.setLineWrap(true);
+        c.add(resadd);
 
         c.setVisible(true);
     }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submit) {
-            if (terms.isSelected()) {
+            if (customer.isSelected() && driver.isSelected() || customer.isSelected() && restaurant.isSelected() || driver.isSelected() && restaurant.isSelected()) {
+                res.setText("Please select only" +
+                        "one account type");
+            } else if (!customer.isSelected() && !driver.isSelected() && !restaurant.isSelected()) {
+                res.setText("Please select an" +
+                        "account type");
+            } else if(userNameField.getText().equals("")) {
+                res.setText("Please input a" +
+                        "username");
+            } else if(passwordField.getText().equals("")) {
+                res.setText("Please input a" +
+                        "Password");
+            }else {
+                if (customer.isSelected()) {
+
+                }
+                if (driver.isSelected()) {
+
+                }
+                if (restaurant.isSelected()) {
+
+                }
                 String data1;
                 String data
                         = "Username : "
@@ -263,6 +284,7 @@ class AdminFrame extends JFrame implements ActionListener {
 //                res.setText("Please accept the"
 //                        + " terms & conditions..");
 //            }
+            }
         } else if (e.getSource() == reset) {
             String def = "";
             userNameField.setText(def);
