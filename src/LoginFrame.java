@@ -221,16 +221,16 @@ class LoginFrame extends JFrame implements ActionListener {
                     a.setVisible(true);
                 }
                 case 1 -> {
-                    //CustomerFrame c = new CustomerFrame(username);
-                    //c.setVisible(true);
+                    CustomerFrame c = new CustomerFrame();
+                    c.setVisible(true);
                 }
                 case 2 -> {
-                    //DriverFrame d = new DriverFrame(username);
-                    //d.setVisible(true);
+                    DriverFrame d = new DriverFrame();
+                    d.setVisible(true);
                 }
                 case 3 -> {
-                    RestaurantFrame r = new RestaurantFrame();
-                    r.setVisible(true);
+                    //RestaurantFrame r = new CustomerFrame();
+                    //r.setVisible(true);
                 }
             }
 

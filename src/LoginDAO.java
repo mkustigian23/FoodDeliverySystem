@@ -68,10 +68,9 @@ public class LoginDAO {
             // Restaurant TYPE = 3
             pstmt.setString(1, "restDemo");
             pstmt.setString(2, "restaurant");
-            pstmt.setInt(3, 3);  // ← FIXED: must be 3, not 2
+            pstmt.setInt(3, 3);  // ← FIXED: must be 3
             pstmt.executeUpdate();
 
-            System.out.println("✅ Default users inserted (if not already present).");
 
         } catch (SQLException e) {
             System.out.println("Error inserting default users: " + e.getMessage());

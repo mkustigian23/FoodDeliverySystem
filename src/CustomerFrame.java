@@ -2,13 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class RestaurantFrame extends JFrame {
+public class CustomerFrame extends JFrame {
     private JComboBox<String> restaurant;
     private JComboBox<Menu> menu;
     private JButton orderButton, doneButton;
     private ArrayList<Restaurant> restaurantList;
 
-    public RestaurantFrame() {
+    public CustomerFrame() {
         setTitle("BSU Eats - Choose Restaurant");
         setBounds(300, 90, 700, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
