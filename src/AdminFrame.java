@@ -115,84 +115,7 @@ class AdminFrame extends JFrame implements ActionListener {
         restaurant.setLocation(600, 340);
         c.add(restaurant);
 
-//        phoneNum = new JLabel("Mobile");
-//        phoneNum.setFont(new Font("Arial", Font.PLAIN, 20));
-//        phoneNum.setSize(100, 20);
-//        phoneNum.setLocation(100, 150);
-//        c.add(phoneNum);
-//
-//        phoneNumField = new JTextField();
-//        phoneNumField.setFont(new Font("Arial", Font.PLAIN, 15));
-//        phoneNumField.setSize(150, 20);
-//        phoneNumField.setLocation(200, 150);
-//        c.add(phoneNumField);
-//
-//        gender = new JLabel("Gender");
-//        gender.setFont(new Font("Arial", Font.PLAIN, 20));
-//        gender.setSize(100, 20);
-//        gender.setLocation(100, 200);
-//        c.add(gender);
-//
-//        male = new JRadioButton("Male");
-//        male.setFont(new Font("Arial", Font.PLAIN, 15));
-//        male.setSelected(true);
-//        male.setSize(75, 20);
-//        male.setLocation(200, 200);
-//        c.add(male);
-//
-//        female = new JRadioButton("Female");
-//        female.setFont(new Font("Arial", Font.PLAIN, 15));
-//        female.setSelected(false);
-//        female.setSize(80, 20);
-//        female.setLocation(275, 200);
-//        c.add(female);
-//
-//        gengp = new ButtonGroup();
-//        gengp.add(male);
-//        gengp.add(female);
-//
-//        dob = new JLabel("DOB");
-//        dob.setFont(new Font("Arial", Font.PLAIN, 20));
-//        dob.setSize(100, 20);
-//        dob.setLocation(100, 250);
-//        c.add(dob);
-//
-//        date = new JComboBox(dates);
-//        date.setFont(new Font("Arial", Font.PLAIN, 15));
-//        date.setSize(50, 20);
-//        date.setLocation(200, 250);
-//        c.add(date);
-//
-//        month = new JComboBox(months);
-//        month.setFont(new Font("Arial", Font.PLAIN, 15));
-//        month.setSize(60, 20);
-//        month.setLocation(250, 250);
-//        c.add(month);
-//
-//        year = new JComboBox(years);
-//        year.setFont(new Font("Arial", Font.PLAIN, 15));
-//        year.setSize(60, 20);
-//        year.setLocation(320, 250);
-//        c.add(year);
-//
-//        addrss = new JLabel("Address");
-//        addrss.setFont(new Font("Arial", Font.PLAIN, 20));
-//        addrss.setSize(100, 20);
-//        addrss.setLocation(100, 300);
-//        c.add(addrss);
-//
-//        addrssArea = new JTextArea();
-//        addrssArea.setFont(new Font("Arial", Font.PLAIN, 15));
-//        addrssArea.setSize(200, 75);
-//        addrssArea.setLocation(200, 300);
-//        addrssArea.setLineWrap(true);
-//        c.add(addrssArea);
-//
-//        terms = new JCheckBox("Accept Terms And Conditions.");
-//        terms.setFont(new Font("Arial", Font.PLAIN, 15));
-//        terms.setSize(250, 20);
-//        terms.setLocation(150, 400);
-//        c.add(terms);
+
 
         submit = new JButton("Submit");
         submit.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -207,15 +130,7 @@ class AdminFrame extends JFrame implements ActionListener {
         reset.setLocation(450, 450);
         reset.addActionListener(this);
         c.add(reset);
-
-//        tout = new JTextArea();
-//        tout.setFont(new Font("Arial", Font.PLAIN, 15));
-//        tout.setSize(300, 400);
-//        tout.setLocation(500, 100);
-//        tout.setLineWrap(true);
-//        tout.setEditable(false);
-//        c.add(tout);
-//
+        
         res = new JLabel("");
         res.setFont(new Font("Arial", Font.PLAIN, 20));
         res.setSize(500, 25);
@@ -314,4 +229,4 @@ class AdminFrame extends JFrame implements ActionListener {
 
 
 
-}
+
