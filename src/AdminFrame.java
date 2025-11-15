@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 //creates the admin frame gui
 class AdminFrame extends JFrame implements ActionListener {
     private Container c;
@@ -17,6 +19,7 @@ class AdminFrame extends JFrame implements ActionListener {
     private JButton reset;
     private JLabel res;
     private JTextArea resadd;
+    private LoginDAO loginDAO = new LoginDAO();
 
     public AdminFrame(){
 
@@ -126,13 +129,25 @@ class AdminFrame extends JFrame implements ActionListener {
                         "Password");
             }else {
                 if (customer.isSelected()) {
-
+                    try {
+                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 1);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
                 if (driver.isSelected()) {
-
+                    try {
+                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 2);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
                 if (restaurant.isSelected()) {
-
+                    try {
+                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 3);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
                 String data1;
                 String data
