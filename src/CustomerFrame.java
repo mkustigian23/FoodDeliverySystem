@@ -69,7 +69,7 @@ public class CustomerFrame extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 // Single click action
-                new MenuFrame(restaurant.getId(), restaurant.getName(), cartPanel);
+                new MenuFrame(restaurant.getId(), restaurant.getName());
                 dispose(); // close CustomerFrame if needed
             }
         });
