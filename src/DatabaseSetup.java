@@ -30,9 +30,9 @@ public class DatabaseSetup {
 
             // Insert menu for the burger restaurant
             mdao.insert(burgerId, "Cheeseburger", 12.00, "src/cheeseburger.png");
-            mdao.insert(burgerId, "Bacon Cheeseburger", 16.00, "src/bacon.png");
-            mdao.insert(burgerId, "Fries", 7.00, "src/fries.png");
-            mdao.insert(burgerId, "Milk Shake", 7.00, "src/milkShake.png");
+            mdao.insert(burgerId, "Bacon Cheeseburger", 14.00, "src/bacon.png");
+            mdao.insert(burgerId, "Fries", 4.00, "src/fries.png");
+            mdao.insert(burgerId, "Milk Shake", 6.00, "src/milkShake.png");
 
 
             // Insert menu for the taco restaurant
