@@ -7,7 +7,10 @@ import java.sql.SQLException;
 
 public class CustomerFrame extends JFrame {
 
+    private CartUI cartPanel = new CartUI();
+
     public CustomerFrame() {
+
         setTitle("Select a Restaurant");
         setSize(800, 500);
         setLocationRelativeTo(null);
@@ -66,7 +69,7 @@ public class CustomerFrame extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 // Single click action
-                new MenuFrame(restaurant.getId(), restaurant.getName());
+                new MenuFrame(restaurant.getId(), restaurant.getName(), cartPanel);
                 dispose(); // close CustomerFrame if needed
             }
         });

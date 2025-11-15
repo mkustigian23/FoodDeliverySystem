@@ -1,6 +1,20 @@
-//public class Cart extends Menu{
+public class Cart {
+    private String name;
+    private double price;
 
-    //public Cart(String itemName, double price) {
-      //  super(itemName, price);
-   // }
-//}
+    public Cart(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+    @Override
+    public String toString() {
+        return name + " - $" + String.format("%.2f", price);
+    }
+}

@@ -6,12 +6,14 @@ import java.util.List;
 
 public class MenuFrame extends JFrame {
 
+    private CartUI cartPanel;
     private int restaurantId;
     private String restaurantName;
 
-    public MenuFrame(int restaurantId, String restaurantName) {
+    public MenuFrame(int restaurantId, String restaurantName, CartUI cartPanel) {
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
+        this.cartPanel = cartPanel;
 
         setTitle("Menu - " + restaurantName);
         setSize(800, 600);
@@ -28,9 +30,10 @@ public class MenuFrame extends JFrame {
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.addActionListener(e -> {
             // Open previous frame
-            new CustomerFrame(); // opens the previous page
+            new CustomerFrame();
             dispose();            // closes the current MenuFrame
         });
+
 
         // Add the button to the NORTH or SOUTH
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -60,8 +63,19 @@ public class MenuFrame extends JFrame {
             mainPanel.add(createMenuItemPanel(item));
         }
 
-        add(new JScrollPane(mainPanel), BorderLayout.CENTER);
+        // cart on the side of the menu
+        JSplitPane splitPane = new JSplitPane(
+                JSplitPane.HORIZONTAL_SPLIT,
+                new JScrollPane(mainPanel),  // menu left
+                cartPanel                     // cart right
+        );
+
+        splitPane.setDividerLocation(550);
+        splitPane.setResizeWeight(0.75);
+
+        add(splitPane, BorderLayout.CENTER);
         setVisible(true);
+
     }
 
 
@@ -96,10 +110,15 @@ public class MenuFrame extends JFrame {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+
+                Cart cartItem = new Cart(item.getName(), item.getPrice());
+                cartPanel.addItemToCart(cartItem);
+
                 JOptionPane.showMessageDialog(MenuFrame.this,
                         item.getName() + " added to cart!");
             }
         });
+
 
         return panel;
     }
