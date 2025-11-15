@@ -31,12 +31,28 @@ public class MenuFrame extends JFrame {
             new CustomerFrame(); // opens the previous page
             dispose();            // closes the current MenuFrame
         });
-
         // Add the button to the NORTH or SOUTH
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(backButton, BorderLayout.WEST);
         topPanel.add(titleLabel, BorderLayout.CENTER);
         add(topPanel, BorderLayout.NORTH);
+
+        // Next button
+        JButton nextButton = new JButton("Next");
+        nextButton.setFont(new Font("Arial", Font.PLAIN, 18));
+        nextButton.addActionListener(e -> {
+            // Open Next frame
+            new CartUI(); // opens the nextpage
+            dispose();            // closes the current MenuFrame
+        });
+
+        // Add the button to the NORTH or SOUTH
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(nextButton, BorderLayout.SOUTH);
+        bottomPanel.add(titleLabel, BorderLayout.CENTER);
+        add(bottomPanel, BorderLayout.SOUTH);
+
+
 
 
         // panel for menu grid
