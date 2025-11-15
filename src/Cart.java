@@ -1,6 +1,6 @@
-public class Cart extends Menu{
+//public class Cart extends Menu{
 
-    public Cart(String itemName, double price) {
-        super(itemName, price);
-    }
-}
+    //public Cart(String itemName, double price) {
+      //  super(itemName, price);
+   // }
+//}
