@@ -9,6 +9,7 @@ public class MenuFrame extends JFrame {
     private int restaurantId;
     private String restaurantName;
 
+
     public MenuFrame(int restaurantId, String restaurantName) {
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
@@ -51,8 +52,6 @@ public class MenuFrame extends JFrame {
         bottomPanel.add(nextButton, BorderLayout.SOUTH);
         bottomPanel.add(titleLabel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
-
-
 
 
         // panel for menu grid
@@ -112,6 +111,9 @@ public class MenuFrame extends JFrame {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+
+                CartDAO.addItem(item);
+
                 JOptionPane.showMessageDialog(MenuFrame.this,
                         item.getName() + " added to cart!");
             }

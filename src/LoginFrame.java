@@ -122,19 +122,19 @@ class LoginFrame extends JFrame implements ActionListener {
 
         date = new JComboBox(dates);
         date.setFont(new Font("Arial", Font.PLAIN, 15));
-        date.setSize(50, 20);
+        date.setSize(70, 30);
         date.setLocation(200, 250);
         c.add(date);
 
         month = new JComboBox(months);
         month.setFont(new Font("Arial", Font.PLAIN, 15));
-        month.setSize(60, 20);
+        month.setSize(80, 30);
         month.setLocation(250, 250);
         c.add(month);
 
         year = new JComboBox(years);
         year.setFont(new Font("Arial", Font.PLAIN, 15));
-        year.setSize(60, 20);
+        year.setSize(90, 30);
         year.setLocation(320, 250);
         c.add(year);
 

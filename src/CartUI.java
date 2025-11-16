@@ -43,7 +43,9 @@ public class CartUI extends JFrame {
 
         JButton checkoutButton = new JButton("Checkout");
         checkoutButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Checkout not implemented yet!");
+            int total = (int) CartDAO.getTotal();    // however your cart computes the total
+            new PaymentFrame(total);
+            dispose();
         });
 
         buttonPanel.add(backButton);
@@ -55,6 +57,7 @@ public class CartUI extends JFrame {
         refreshCartDisplay();
 
         setVisible(true);
+
     }
 
     private void refreshCartDisplay() {

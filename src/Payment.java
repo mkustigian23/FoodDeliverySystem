@@ -1,16 +1,15 @@
-public class Payment extends CreditDebit{
-    private int balance;
+public class Payment {
+    private int amount;
 
-    public void setBalance(int b) {
-        balance = b;
+    public Payment(int amount) {
+        this.amount = amount;
     }
-    public int getBalance() {
-        return balance;
+
+    public void purchase() {
+        // no logic needed for now
     }
-    public void purchase(int price) {
-        balance = balance - price;
-    }
+
     public String sendReceipt() {
-        return ("Purchase was successful for $" + balance);
+        return "Purchase was successful for $" + amount;
     }
 }

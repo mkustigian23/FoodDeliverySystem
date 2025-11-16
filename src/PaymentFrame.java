@@ -15,14 +15,20 @@ public class PaymentFrame extends JFrame implements ActionListener {
     private JLabel statusLabel;
     private Payment payment;
 
-    public PaymentFrame() {
-        payment = new Payment();
-        payment.setBalance(100);
+    private int total; // <-- stores the total passed in
+
+
+    public PaymentFrame(int totalFromCart) {
+
+        this.total = totalFromCart;  // save the total
+
+
+        payment = new Payment(total); // pass total into payment
 
         setTitle("Payment Information");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(8, 4, 10, 10));
+        setLayout(new GridLayout(9, 2, 10, 10));
 
         add(new JLabel("First Name:"));
         firstName = new JTextField();
@@ -45,7 +51,8 @@ public class PaymentFrame extends JFrame implements ActionListener {
         add(cvv);
 
         add(new JLabel("Amount:"));
-        totalAmount = new JTextField();
+        totalAmount = new JTextField(String.valueOf(total));
+        totalAmount.setEditable(false);  // amount should not be editable
         add(totalAmount);
 
         payButton = new JButton("Pay Now");
@@ -55,7 +62,17 @@ public class PaymentFrame extends JFrame implements ActionListener {
         statusLabel = new JLabel("");
         add(statusLabel);
 
+        JButton backButton = new JButton("Back");
+        backButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        backButton.addActionListener(e -> {
+            // Open previous frame
+            new CartUI(); // opens the previous page
+            dispose();            // closes the current MenuFrame
+        });
+        add(backButton);   // Adds the back button
+
         setVisible(true);
+
     }
 
     // method actionPerformed()
@@ -64,14 +81,11 @@ public class PaymentFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == payButton) {
-            try {
-                int price = Integer.parseInt(totalAmount.getText());
-                payment.purchase(price);
-                JOptionPane.showMessageDialog(this, payment.sendReceipt());
-                statusLabel.setText("Payment successful!");
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Enter all fields", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+
+            payment.purchase(); // no need to pass a number — we already know the amount
+
+            JOptionPane.showMessageDialog(this, payment.sendReceipt());
+            statusLabel.setText("Payment successful!");
         }
     }
 }
