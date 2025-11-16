@@ -1,3 +1,8 @@
+/**
+ * Documentation: DatabaseManager
+ *
+ * DatabaseManager handles the connection to the SQlite database used.
+ */
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,9 +15,10 @@ public class DatabaseManager {
     private static final String URL = "jdbc:sqlite:food_delivery.db";
 
     /**
+     * Establishes a connection to the SQlite database
      *
-     * @return
-     * @throws SQLException
+     * @return a connection object representing the database connection
+     * @throws SQLException if a database access error occurs
      */
     public static Connection connect() throws SQLException {
         Connection conn = DriverManager.getConnection(URL);

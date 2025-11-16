@@ -1,3 +1,20 @@
+/**
+ * Documentation: LoginDAO
+ *
+ * This class manages all database operations with user logins. It handles creations of the logins table, inserting
+ * new users, and demo users
+ *
+ * Module Purpose:
+ * - Create the logins table with id, username, password, and account type
+ * - Insert new login records
+ * - Insert demo users for Admin, Customer, Driver, and Restaurant roles
+ *
+ * Key Methods:
+ * - createTable(): Creates the logins table
+ * - insert(String username, String password, int account_type): Inserts a new user into the logins table
+ * - insertDefaultUsers(): Inserts default demo users into the logins table
+ */
+
 import java.sql.*;
 import java.sql.*;
 
@@ -6,6 +23,12 @@ public class LoginDAO {
     // ========================================
     // CREATE TABLE (FIXED)
     // ========================================
+
+    /**
+     * Creates the logins table in the database
+     *
+     * @throws SQLException if a database access error occurs
+     */
     public void createTable() throws SQLException {
         String sql = """
             CREATE TABLE IF NOT EXISTS logins (
@@ -25,6 +48,15 @@ public class LoginDAO {
     // ========================================
     // INSERT NEW USER (FIXED)
     // ========================================
+
+    /**
+     * Inserts a new user into the logins table
+     *
+     * @param username Username of the user
+     * @param password password of the user
+     * @param account_type Type of account (0 = Admin, 1 = customer, 2 = driver, 3 = restaurant)
+     * @throws SQLException if a database access error occurs
+     */
     public void insert(String username, String password, int account_type) throws SQLException {
         String sql = "INSERT INTO logins(username, password, account_type) VALUES (?, ?, ?)";
 
@@ -41,6 +73,14 @@ public class LoginDAO {
     // ========================================
     // INSERT DEFAULT USERS (FIXED)
     // ========================================
+
+    /**
+     * Inserts default demo users into the logins table
+     *  - Admin: username=FoodAdmin, password=COMP390
+     *  - Customer: username=customerDemo, password= ilikefood
+     *  - Driver: username=driverDemo, password=driving
+     *  - Restaurant: username=restDemo, password=restaurant
+     */
     public void insertDefaultUsers() {
         String sql = "INSERT OR IGNORE INTO logins(username, password, account_type) VALUES(?, ?, ?)";
 

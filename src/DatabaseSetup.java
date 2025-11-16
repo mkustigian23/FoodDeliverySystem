@@ -1,3 +1,19 @@
+/**
+ * Documentation: DatabaseSetup
+ *
+ * This class initializes the application's database with restaurants and the menu item that corresponds with it.
+ *
+ * Module Purpose:
+ * - Creates the tables for restaurants and menus
+ * - Resets restaurant data by clearing the restaurant table
+ * - Inserts restaurants and the menu item that corresponds with it
+ *
+ * Key Method:
+ * main(String[] args):
+ * - Creates Restaurant DAO and MenuDAO objects to set up the database
+ * - Resets the restaurants table and insert restaurant and menu data
+ */
+
 import java.sql.Connection;
 import java.sql.Statement;
 

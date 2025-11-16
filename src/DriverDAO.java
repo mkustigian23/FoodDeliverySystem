@@ -1,3 +1,15 @@
+/**
+ * Documentation: DriverDAO
+ *
+ * This class handles database operation for drivers in the food delivery system. It allows creating the drivers table,
+ * inserting new drivers, and retrieving all drivers.
+ *
+ * Module Purpose:
+ * - Create the SQLite drivers table
+ * - Insert new drivers into the table
+ * - Retrieve all driver entries
+ *
+ */
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,31 +20,31 @@ public class DriverDAO {
     // Create SQLite table "drivers"
 
     /**
+     *Creates the drivers table in the database
      *
-     * @throws SQLException
+     * @throws SQLException if a database access error occurs
      */
     public void createTable() throws SQLException {
         String sql = """
-            CREATE TABLE IF NOT EXISTS drivers (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                vehicle TEXT NOT NULL
-            );
-        """;
+                    CREATE TABLE IF NOT EXISTS drivers (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        name TEXT NOT NULL,
+                        vehicle TEXT NOT NULL
+                    );
+                """;
         try (Connection conn = DatabaseManager.connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         }
     }
 
-    // inserting method into the table drivers, with name and vehicle
-
     /**
+     * inserting method into the table drivers, with name and vehicle
      *
-     * @param name
-     * @param vehicle
-     * @return
-     * @throws SQLException
+     * @param name the name of the driver
+     * @param vehicle the vehicle of the driver
+     * @return the ID of the inserted driver or -1 if insertion fails
+     * @throws SQLException if a database access error occurs
      */
 
     public int insert(String name, String vehicle) throws SQLException {
@@ -52,9 +64,10 @@ public class DriverDAO {
     // Admin method to get all drivers from the SQLite table
 
     /**
+     * Retrieves all drivers from the drivers table
      *
-     * @return
-     * @throws SQLException
+     * @return a list of strings representing a driver, "id: name"
+     * @throws SQLException if a database access error occurs
      */
     public List<String> getAll() throws SQLException {
         List<String> list = new ArrayList<>();

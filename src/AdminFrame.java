@@ -1,3 +1,21 @@
+/**
+ * Documentation: AdminFrame
+ *
+ * Module Purpose:
+ * Provides a GUI for the admin panel and it allows an admin to create new user accounts with different account
+ * types (customer, driver, restaurant)
+ *
+ * Key Methods:
+ * AdminFrame():
+ * - Constructor that sets up admin panel GUI
+ * - Initializes labels, text fields, radio buttons, and buttons
+ *
+ * actionPerformed(ActionEvent e):
+ * - Handles the submit and reset button clicks
+ * - Validates inputs and inserts a new user into the database
+ * - Clears the input fields when reset is clicked
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +39,12 @@ class AdminFrame extends JFrame implements ActionListener {
     private JTextArea resadd;
     private LoginDAO loginDAO = new LoginDAO();
 
+    /**
+     * Constructor that sets up admin panel GUI
+     * Initializes labels, text fields, radio buttons, and buttons
+     * Sets up the window size, layout, and UI components
+     */
+
     public AdminFrame(){
 
         setTitle("BSU Eats Delivery App Admin Panel");
@@ -31,6 +55,7 @@ class AdminFrame extends JFrame implements ActionListener {
         c = getContentPane();
         c.setLayout(null);
 
+        // Username label and field
         userName = new JLabel("Username");
         userName.setFont(new Font("Arial", Font.PLAIN, 20));
         userName.setSize(200, 40);
@@ -43,6 +68,7 @@ class AdminFrame extends JFrame implements ActionListener {
         userNameField.setLocation(250, 150);
         c.add(userNameField);
 
+        // Password label and field
         password = new JLabel("Password");
         password.setFont(new Font("Ariel", Font.PLAIN, 20));
         password.setSize(200, 40);
@@ -55,6 +81,7 @@ class AdminFrame extends JFrame implements ActionListener {
         passwordField.setLocation(250, 250);
         c.add(passwordField);
 
+        // Account type label and radio buttons
         accountType = new JLabel("Account Type");
         accountType.setFont((new Font("Ariel", Font.PLAIN, 20)));
         accountType.setSize(200, 40);
@@ -82,8 +109,7 @@ class AdminFrame extends JFrame implements ActionListener {
         restaurant.setLocation(600, 340);
         c.add(restaurant);
 
-
-
+        // Submit and reset buttons
         submit = new JButton("Submit");
         submit.setFont(new Font("Arial", Font.PLAIN, 15));
         submit.setSize(100, 20);
@@ -113,8 +139,15 @@ class AdminFrame extends JFrame implements ActionListener {
 
         c.setVisible(true);
     }
+
+    /**
+     * Handles the button clicks
+     *
+     * @param e ActionEvent triggered by clicking the reset or submit buttons
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submit) {
+            // Validate account type selection
             if (customer.isSelected() && driver.isSelected() || customer.isSelected() && restaurant.isSelected() || driver.isSelected() && restaurant.isSelected()) {
                 res.setText("Please select only" +
                         "one account type");

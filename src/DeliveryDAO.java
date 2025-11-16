@@ -1,3 +1,14 @@
+/**
+ * Documentation: DeliveryDAO
+ *
+ * This class handles all database operations related to deliveries. It allows creating the deliveries table,
+ * inserting new deliveries, and retrieving delivery history for customers, drivers, restaurants, or admins.
+ *
+ * Module Purpose:
+ * - Stores delivery records in the database
+ * - Provides access to delivers for customers, drivers, and restaurants
+ * - Allows admins to view all deliveries
+ */
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -5,11 +16,10 @@ import java.util.List;
 
 public class DeliveryDAO {
 
-    // creating a SQLite deliveries table; id, customer_id, driver_id, restaurant_id,
-
     /**
+     * creating a SQLite deliveries table; id, customer_id, driver_id, restaurant_id
      *
-     * @throws SQLException
+     * @throws SQLException if a database access error occurs
      */
     public void createTable() throws SQLException {
         String sql = """
@@ -31,12 +41,13 @@ public class DeliveryDAO {
     }
 
     /**
+     * inserts a new delivery record into the database
      *
-     * @param customerId
-     * @param driverId
-     * @param restaurantId
-     * @param deliveryTime
-     * @throws SQLException
+     * @param customerId the id of the customer receiving the delivery
+     * @param driverId the id of the driver assigned to the delivery
+     * @param restaurantId the id of the restaurant sending the delivery
+     * @param deliveryTime the timestamp of the delivery time
+     * @throws SQLException if a database access error occurs
      */
     public void insert(int customerId, int driverId, int restaurantId, String deliveryTime) throws SQLException {
         String sql = "INSERT INTO deliveries(customer_id, driver_id, restaurant_id, delivery_time) VALUES (?, ?, ?, ?)";
@@ -51,14 +62,12 @@ public class DeliveryDAO {
     }
 
 
-
-    // Method for customer UI to be able to see all of their past orders for only the customer.
-
     /**
+     * Method for customer UI to be able to see all of their past orders for only the customer.
      *
-     * @param customerId
-     * @return
-     * @throws SQLException
+     * @param customerId id of the customer
+     * @return list of strings representing each delivery
+     * @throws SQLException if a database access error occurs
      */
     public List<String> getDeliveriesByCustomer(int customerId) throws SQLException {
         List<String> list = new ArrayList<>();
@@ -86,13 +95,12 @@ public class DeliveryDAO {
         return list;
     }
 
-    // Driver method to get all of the driver's past deliveries that they have made
-
     /**
+     * Driver method to get all of the driver's past deliveries that they have made
      *
-     * @param driverId
-     * @return
-     * @throws SQLException
+     * @param driverId id of the driver
+     * @return list of strings representing each delivery
+     * @throws SQLException if a database access error occurs
      */
     public List<String> getDeliveriesByDriver(int driverId) throws SQLException {
         List<String> list = new ArrayList<>();
@@ -120,13 +128,12 @@ public class DeliveryDAO {
         return list;
     }
 
-    // Restaurant method to get all deliveries that the restaurant has previously sent out.
-
     /**
+     * Restaurant method to get all deliveries that the restaurant has previously sent out.
      *
-     * @param restaurantId
-     * @return
-     * @throws SQLException
+     * @param restaurantId id of the restaurant
+     * @return list of strings representing each delivery
+     * @throws SQLException if a database access error occurs
      */
     public List<String> getDeliveriesByRestaurant(int restaurantId) throws SQLException {
         List<String> list = new ArrayList<>();
@@ -155,13 +162,10 @@ public class DeliveryDAO {
     }
 
 
-
-
-    // ADMIN method showing all deliveries that have ever happened
-
     /**
+     * ADMIN method showing all deliveries that have ever happened
      *
-     * @throws SQLException
+     * @throws SQLException if a database access error occurs
      */
     public void printAllDeliveries() throws SQLException {
         String sql = """

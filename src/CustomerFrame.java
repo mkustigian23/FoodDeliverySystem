@@ -1,3 +1,23 @@
+/**
+ * Documentation: Customer Frame
+ *
+ * This class represents the UI for selecting a restaurant. It displays the restaurants the user can choose from
+ * with images and names. Clicking the restaurant will open the correct menuFrame that corresponds with the
+ * correct restaurant.
+ *
+ * Key Features:
+ * - Gets restaurant data from the restaurantDAO
+ * - Displays the restaurant name and images
+ * - Opens the MenuFrame for the specific restaurant that is clicked on
+ *
+ * Key methods:
+ * CustomerFrame():
+ * - Initializes the UI and displays all the restaurant options
+ *
+ * createRestaurantPanel(Restaurant restaurant):
+ * - Creates a JPanel for the restaurant with the name and image and action to click the restaurant.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -8,6 +28,11 @@ import java.sql.SQLException;
 public class CustomerFrame extends JFrame {
 
     private CartUI cartPanel = new CartUI();
+
+    /**
+     * Constructs the customer Frame and initializes the GUI with all the restaurants from the database
+     * Sets up a grid layout for the restaurants.
+     */
 
     public CustomerFrame() {
 
@@ -44,6 +69,14 @@ public class CustomerFrame extends JFrame {
         add(new JScrollPane(mainPanel), BorderLayout.CENTER);
         setVisible(true);
     }
+
+    /**
+     * Creates a JPanel for a single restaurant
+     * Includes the restaurant image and name and click action to open the menuFrame
+     *
+     * @param restaurant the Restaurant object to display
+     * @return a JPanel which contains the restaurant's name and image
+     */
 
     private JPanel createRestaurantPanel(Restaurant restaurant) {
         JPanel panel = new JPanel();

@@ -1,10 +1,38 @@
+/**
+ * Documentation: MenuDAO
+ *
+ * This class is a DAO for the menu items in the database. It provides methods to create the menu table, insert new menu
+ * item, and retrieve menu items
+ *
+ * Module Purpose:
+ * - Manage the database table for menu items
+ * - Provide data access for UI classes like MenuFrame
+ *
+ * Key Methods:
+ * createTable():
+ * - Creates the menu items table in the database
+ * - Drops old tables to ensure correct table structure
+ *
+ * insert(int restaurantId, String name, double price, String menu_imagePath):
+ * - Inserts a new menu item for the specific restaurant
+ *
+ * getMenuByRestaurant(int restaurantId)
+ * - Retrieves the menu items for a specific restaurant
+ */
+
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDAO {
 
-    // Create the menu_items table
+    /**
+     * Creates the menu_items table in the database
+     * Drops old tables to ensure correct table structure
+     *
+     * @throws SQLException if a database access error occurs
+     */
     public void createTable() throws SQLException {
         try (Connection conn = DatabaseManager.connect();
              Statement stmt = conn.createStatement()) {
@@ -30,7 +58,16 @@ public class MenuDAO {
     }
 
 
-    // Insert a menu item
+    /**
+     * Inserts a new menu item for the specific restaurant
+     *
+     * @param restaurantId the ID of the restaurant
+     * @param name the name of the menu item
+     * @param price the price of the menu item
+     * @param menu_imagePath the path to the menu item image
+     * @return int the generated ID of the inserted menu item or -1 if insertion fails
+     * @throws SQLException if a database access error occurs
+     */
     public int insert(int restaurantId, String name, double price, String menu_imagePath) throws SQLException {
         String sql = "INSERT INTO menu_items(restaurant_id, name, price, menu_image_path) VALUES(?, ?, ?, ?)";
 
@@ -49,7 +86,13 @@ public class MenuDAO {
         return -1;
     }
 
-    // Get all menu items for a restaurant
+    /**
+     * Retrieves the menu items for a specific restaurant
+     *
+     * @param restaurantId the id of the restaurant
+     * @return List<Menu> a list of menu objects for the restaurant
+     * @throws SQLException if a database access error occurs
+     */
     public List<Menu> getMenuByRestaurant(int restaurantId) throws SQLException {
         List<Menu> items = new ArrayList<>();
         String sql = "SELECT * FROM menu_items WHERE restaurant_id = ?";

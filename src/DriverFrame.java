@@ -1,3 +1,16 @@
+/**
+ * Documentation: DriverFrame
+ *
+ * This frame represents the UI dashboard for drivers and
+ * it allows a driver to view all deliveries assigned to them
+ *
+ * The module purpose:
+ * - Display a dropdown list of all drivers
+ * - Show the list of deliveries assigned to the driver
+ * - Refresh the deliveries when a driver is selected
+ *
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,6 +24,11 @@ public class DriverFrame extends JFrame {
 
     private DriverDAO driverDAO;
     private DeliveryDAO deliveryDAO;
+
+    /**
+     *
+     * Constructs the driver frame window and initializes all the UI components
+     */
 
     public DriverFrame() {
         setTitle("BSU Eats - Driver Dashboard");
@@ -48,6 +66,9 @@ public class DriverFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Loads all drivers from the database
+     */
     private void loadDrivers() {
         try {
             List<String> drivers = driverDAO.getAll();
@@ -59,6 +80,11 @@ public class DriverFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Error loading drivers: " + e.getMessage());
         }
     }
+
+    /**
+     *
+     * Loads all deliveries assigned to the selected driver and displays them
+     */
 
     private void loadDeliveries() {
         deliveriesArea.setText("");

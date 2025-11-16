@@ -1,3 +1,25 @@
+/**
+ * Documentation: Payment Frame
+ *
+ * This class is the UI for the payment page for entering payment information in order for the user to
+ * pay for their food.
+ *
+ * Module Purpose:
+ * Collects user payment information like their name, card number, expiration date, and cvv number.
+ * Displays the total amount of all the food they want to order passed from the CartUI
+ * Makes sure the user input all fields otherwise the payment will not process successfully
+ * Interacts with payment class to simulate a purchase and receipt
+ *
+ * Key Methods:
+ * PaymentFrame(int totalFromCart):
+ * - Constructor sets up the payment window
+ * - Stores the total, creates labels, text fields, and action buttons. It also initializes GUI components.
+ * actionPerformed(ActionEvent e):
+ * - Happens when the Pay Now button is clicked and makes sure there are inputs in all the fields.
+ * - Checks if the first name, last name, cvv, card number, and expiration date are filled in correctly.
+ * - If valid it calls payment.purchase() and displays receipt.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,7 +39,12 @@ public class PaymentFrame extends JFrame implements ActionListener {
 
     private int total; // <-- stores the total passed in
 
-
+    /**
+     * Creates the payment window where user will enter their payment info
+     *
+     * @param totalFromCart the total price of all the food items that the user added to their cart, passed from CartUI
+     *                      and displayed here
+     */
     public PaymentFrame(int totalFromCart) {
 
         this.total = totalFromCart;  // save the total
@@ -65,8 +92,7 @@ public class PaymentFrame extends JFrame implements ActionListener {
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.addActionListener(e -> {
-            // Open previous frame
-            new CartUI(); // opens the previous page
+            new CartUI(); // opens the previous frame
             dispose();            // closes the current MenuFrame
         });
         add(backButton);   // Adds the back button
@@ -75,14 +101,49 @@ public class PaymentFrame extends JFrame implements ActionListener {
 
     }
 
-    // method actionPerformed()
-    // to get the action performed
-    // by the user and act accordingly
+    /**
+     * Handles the action for the Pay Now button
+     * Makes sure all fields for payment information are entered (name, card number, expiration date, cvv)
+     * @param e the ActionEvent becomes triggered when the user clicks the Pay Now button
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == payButton) {
 
-            payment.purchase(); // no need to pass a number — we already know the amount
+            // Makes sure the user enters their first name
+            if (firstName.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter your first name.");
+                return;
+            }
+
+            // Makes sure the user enters their last name
+            if(lastName.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter your last name.");
+                return;
+            }
+
+            // Makes sure the user enters their card number
+            String card = cardNumber.getText().trim();
+            if (!card.matches("\\d{16}")) {
+                JOptionPane.showMessageDialog(this, "Card number must be 16 digits.");
+                return;
+            }
+
+            // Makes sure the user enters their expiration date
+            String exp = expiration.getText().trim();
+            if (!exp.matches("(0[1-9]|1[0-2])\\/\\d{2}")) {
+                JOptionPane.showMessageDialog(this, "Expiration must be in MM/YY format.");
+                return;
+            }
+
+            // Makes sure the user enters their cvv number
+            String cvvText = cvv.getText().trim();
+            if (!cvvText.matches("\\d{3,4}")) {
+                JOptionPane.showMessageDialog(this, "CVV must be 3 or 4 digits.");
+                return;
+            }
+
+            payment.purchase();
 
             JOptionPane.showMessageDialog(this, payment.sendReceipt());
             statusLabel.setText("Payment successful!");

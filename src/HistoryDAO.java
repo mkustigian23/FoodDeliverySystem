@@ -1,3 +1,14 @@
+/**
+ * Documentation: HistoryDAO
+ *
+ * Handles the database operations for the order history in the food delivery system.
+ *
+ * Module Purpose:
+ * - Creates the history table for storing delivery records
+ * - Checks for existing emails before inserting new customer history
+ * - Inserts new customer order history entries
+ * - Retrieves all customers from history database
+ */
 
 import javax.xml.crypto.Data;
 import java.sql.*;
@@ -8,8 +19,8 @@ public class HistoryDAO {
     // Creates a table inside of food_deliver.db called "history" where the delivery history is stored
 
     /**
-     *
-     * @throws SQLException
+     * Creates the history table in the database
+     * @throws SQLException if a database access error occurs
      */
     public void createTable() throws SQLException {
         String sql = """
@@ -26,12 +37,13 @@ public class HistoryDAO {
             stmt.execute(sql);
         }
     }
-    // Method to check if an email exists in the SQLite table before adding it to the database
+
     /**
+     * Method to check if an email exists in the SQLite table before adding it to the database
      *
-     * @param email
-     * @return
-     * @throws SQLException
+     * @param email the email address to check
+     * @return true if the email exists, false if not
+     * @throws SQLException if a database access error occurs
      */
     public boolean emailExists(String email) throws SQLException {
         String sql = "SELECT COUNT(*) FROM customers WHERE email = ?";
@@ -42,13 +54,13 @@ public class HistoryDAO {
             return rs.getInt(1) > 0;
         }
     }
-    // Method to add an email/customer into the table and checks to see if the email already exists
 
     /**
+     * Method to add an email/customer into the table and checks to see if the email already exists
      *
-     * @param name
-     * @param email
-     * @throws SQLException
+     * @param name Customers name
+     * @param email Customers email
+     * @throws SQLException if the email already exists or a database access error occurs
      */
     public void insert(String name, String email) throws SQLException {
         if (emailExists(email)) {
@@ -63,12 +75,12 @@ public class HistoryDAO {
             pstmt.executeUpdate();
         }
     }
-    // Method that gets all customers from the database
 
     /**
+     * Method that gets all customers from the database
      *
-     * @return
-     * @throws SQLException
+     * @return list of customer objects representing all customers
+     * @throws SQLException if a database access error occurs
      */
     public List<Customer> getAll() throws SQLException {
         List<Customer> customers = new ArrayList<>();

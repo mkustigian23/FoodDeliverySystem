@@ -1,3 +1,25 @@
+/**
+ * Documentation: Menu Frame
+ *
+ * This class displays the list of menu items for the different restaurants. Users can view the items and
+ * add them to their cart. Then they can proceed to the cart checkout screen or go back to the restaurant
+ * selection screen
+ *
+ * Module Purpose:
+ * - Shows all the menu items for the specific restaurant.
+ * - Allows users to click on the menu items to add them to their cart.
+ * - Also has back button to go back to the previous screen if needed or next button to move to the next screen.
+ *
+ * Key Methods:
+ * MenuFrame(int restaurantId, String restaurantName):
+ * - Constructor that builds the whole menu UI
+ * - Loads menu items from the database and displays them in a grid
+ *
+ * createMenuItemPanel(Menu item):
+ * - Creates a panel for a single food item that includes the price, name, and image
+ * - Adds a mouse clicked in order for the item to be added to the cart
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,7 +31,12 @@ public class MenuFrame extends JFrame {
     private int restaurantId;
     private String restaurantName;
 
-
+    /**
+     * Constructs MenuFrame for displaying the menu items for the specific restaurants
+     *
+     * @param restaurantId The id of the restaurant for the menu being displayed
+     * @param restaurantName The name of the restaurant
+     */
     public MenuFrame(int restaurantId, String restaurantName) {
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
@@ -28,11 +55,11 @@ public class MenuFrame extends JFrame {
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.addActionListener(e -> {
-            // Open previous frame
             new CustomerFrame(); // opens the previous page
             dispose();            // closes the current MenuFrame
         });
-        // Add the button to the NORTH or SOUTH
+
+        // Add the button to the NORTH
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(backButton, BorderLayout.WEST);
         topPanel.add(titleLabel, BorderLayout.CENTER);
@@ -43,11 +70,13 @@ public class MenuFrame extends JFrame {
         nextButton.setFont(new Font("Arial", Font.PLAIN, 18));
         nextButton.addActionListener(e -> {
             // Open Next frame
-            new CartUI(); // opens the nextpage
+            CartUI cart = new CartUI();
+            cart.setVisible(true);      // show the cart
+            this.setVisible(false); // opens the next page
             dispose();            // closes the current MenuFrame
         });
 
-        // Add the button to the NORTH or SOUTH
+        // Add the button to the SOUTH
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(nextButton, BorderLayout.SOUTH);
         bottomPanel.add(titleLabel, BorderLayout.CENTER);
@@ -79,7 +108,13 @@ public class MenuFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Creates the interactive panel for a menu item and when it's clicked the item is added to the user's cart
+     *
+     * @param item the menu object containing the food details (name, price, image)
+     * @return a JPanel representing this menu item in the UI
 
+     */
     private JPanel createMenuItemPanel(Menu item) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));

@@ -1,3 +1,28 @@
+/**
+ * Documentation: Cart Frame
+ *
+ * This class represents the cart interface where users can view all the items they have added to the cart.
+ * They can remove items from the cart, see the total cost, go back to the restaurant selection screen, or hit
+ * the next button go to the payment screen.
+ *
+ * Module Purpose:
+ * - Displays all items stored in CartDAO
+ * - Lets users remove items
+ * - Shows the total price and updates if someone removes an item or adds another item
+ * - Allows the user to go back to the previous page or go to the payment page
+ *
+ * Key Methods:
+ * CartUI():
+ * - Constructor that builds the carts UI, loads items, and sets up the total price, item list, and back/checkout buttons
+ *
+ * refreshCartDisplay():
+ * - Reloads the carts content and recalculates the total amount when an item is removed
+ * - called when an item is removed
+ *
+ * createCartItemRow(Menu item):
+ * - Creates a row in the UI which contains the menu item's name, price, and remove button.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +33,11 @@ public class CartUI extends JFrame {
     private JPanel itemsPanel;
     private JLabel totalPriceLabel;
 
+    /**
+     * Constructs the CartUI window that shows all items that are added to the cart.
+     * Sets up the interface, total price, and back/checkout button
+     *
+     */
     public CartUI() {
         setTitle("Your Cart");
         setSize(600, 500);
@@ -60,6 +90,13 @@ public class CartUI extends JFrame {
 
     }
 
+    /**
+     * Refreshes cart interface by clearing the existing items, reloading items from CartDAO, and updating the total
+     * price.
+     *
+     * This method is called when the items in the cart change like if an item is removed from the cart
+     */
+
     private void refreshCartDisplay() {
         itemsPanel.removeAll();
 
@@ -79,6 +116,13 @@ public class CartUI extends JFrame {
         itemsPanel.repaint();
     }
 
+    /**
+     * Creates a single row in the cart display for a menu item.
+     * The row has the item name, item price, and a remove button.
+     *
+     * @param item The menu object that represents the food item in the cart
+     * @return the row with the formatted item information
+     */
     private JPanel createCartItemRow(Menu item) {
         JPanel row = new JPanel(new BorderLayout());
         row.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));

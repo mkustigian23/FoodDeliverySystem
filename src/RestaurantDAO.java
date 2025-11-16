@@ -1,9 +1,35 @@
+/**
+ * Documentation: RestaurantDAO
+ *
+ * This class is a DAO for the restaurants table in the database. It provides methods to create the restaurants table,
+ * insert new restaurants, and retrieve all restaurants.
+ *
+ * Module Purpose:
+ * - Manage the database table for restaurants
+ * - Provide data access for UI classes like CustomerFrame
+ *
+ * Key Methods:
+ * createTable():
+ * - Creates the restaurants table in the database
+ *
+ * insert(String name, String location, String imagePath):
+ * - Method that inserts restaurants into the SQLite table restaurant
+ *
+ * getAll():
+ * - Method that gets all restaurants and their data in the table "restaurants"
+ */
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantDAO {
+
+    /**
+     * Creates the restaurants table in the database
+     *
+     * @throws SQLException if database access error occurs
+     */
     public void createTable() throws SQLException {
         String sql = """
                     CREATE TABLE IF NOT EXISTS restaurants (
@@ -19,13 +45,13 @@ public class RestaurantDAO {
         }
     }
 
-    // Method that inserts restaurants into the the SQLite table restaurant
-
     /**
-     * @param name
-     * @param location
-     * @return
-     * @throws SQLException
+     * Method that inserts restaurants into the SQLite table restaurant
+     *
+     * @param name name of the restaurant
+     * @param location location of the restaurant
+     * @return int the generated ID of the inserted restaurant or -1 if insertion fails
+     * @throws SQLException if database access error occurs
      */
     public int insert(String name, String location, String imagePath) throws SQLException {
         String sql = "INSERT INTO restaurants(name, location, image_Path) VALUES(?, ?, ?)";
@@ -46,8 +72,8 @@ public class RestaurantDAO {
     /**
      * Method that gets all restaurants and their data in the table "restaurants"
      *
-     * @return
-     * @throws SQLException
+     * @return List<Restaurant> a list of restaurant objects
+     * @throws SQLException if database access error occurs
      */
     public List<Restaurant> getAll() throws SQLException {
         List<Restaurant> list = new ArrayList<>();

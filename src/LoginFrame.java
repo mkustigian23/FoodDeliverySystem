@@ -1,3 +1,22 @@
+/**
+ * DocumentationL LoginFrame
+ *
+ * This class provides the UI for login and registration and users can enter their username, password,
+ * gender, date of birth, address, and accept terms.
+ * Upon submission, the login is authenticated and based on the user account type they will be redirected.
+ *
+ * Module Purpose:
+ * - Collects login and user information for registration.
+ * - Provides GUI components for text input, radio buttons, combo boxes, and check boxes.
+ * - Redirects user to the appropriate frame when they login successfully.
+ *
+ * Key Methods:
+ * LoginFrame():
+ * - Constructs the login/register UI with required fields and buttons
+ *
+ * actionPerformed(ActionEvent e): Handles button clicks for reset and submit. Validates login and redirects users.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -48,8 +67,11 @@ class LoginFrame extends JFrame implements ActionListener {
             "2015", "2016", "2017", "2018",
             "2019" };
 
-    // constructor, to initialize the components
-    // with default values.
+    /**
+     * Constructs the LoginFrame
+     * Initializes the GUI with all fields, label, buttons, and default values.
+     * Sets up the layout and action listeners for submit and reset buttons
+     */
     public LoginFrame()
     {
         setTitle("BSU Eats Delivery App");
@@ -195,9 +217,12 @@ class LoginFrame extends JFrame implements ActionListener {
         c.setVisible(true);
     }
 
-    // method actionPerformed()
-    // to get the action performed
-    // by the user and act accordingly
+    /**
+     * Handles button actions for submit and reset.
+     * Checks the login information using authenticator and redirects the user based on their account type.
+     *
+     * @param e the ActionEvent triggered by a button click
+     */
     public void actionPerformed(ActionEvent e) {
 
         String username = userNameField.getText();
@@ -239,7 +264,6 @@ class LoginFrame extends JFrame implements ActionListener {
         else {
             JOptionPane.showMessageDialog(null, "Invalid username or password");
         }
-
 
     }
 }
