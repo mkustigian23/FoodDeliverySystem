@@ -11,7 +11,7 @@
  * Interacts with payment class to simulate a purchase and receipt
  *
  * Key Methods:
- * PaymentFrame(int totalFromCart):
+ * PaymentFrame(int totalFromCart, Address address):
  * - Constructor sets up the payment window
  * - Stores the total, creates labels, text fields, and action buttons. It also initializes GUI components.
  * actionPerformed(ActionEvent e):
@@ -36,6 +36,7 @@ public class PaymentFrame extends JFrame implements ActionListener {
     private JButton payButton;
     private JLabel statusLabel;
     private Payment payment;
+    private Address address;
 
     private int total; // <-- stores the total passed in
 
@@ -44,10 +45,12 @@ public class PaymentFrame extends JFrame implements ActionListener {
      *
      * @param totalFromCart the total price of all the food items that the user added to their cart, passed from CartUI
      *                      and displayed here
+     * @param address the Address object containing the delivery information for the user
      */
-    public PaymentFrame(int totalFromCart) {
+    public PaymentFrame(int totalFromCart, Address address) {
 
         this.total = totalFromCart;  // save the total
+        this.address = address;
 
 
         payment = new Payment(total); // pass total into payment
@@ -92,7 +95,7 @@ public class PaymentFrame extends JFrame implements ActionListener {
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.addActionListener(e -> {
-            new CartUI(); // opens the previous frame
+            new AddressFrame(); // opens the previous frame
             dispose();            // closes the current MenuFrame
         });
         add(backButton);   // Adds the back button

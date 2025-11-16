@@ -21,6 +21,9 @@
  *
  * createCartItemRow(Menu item):
  * - Creates a row in the UI which contains the menu item's name, price, and remove button.
+ *
+ * goToAddress():
+ * - Takes user from the cart ui to the address frame
  */
 
 import javax.swing.*;
@@ -42,7 +45,7 @@ public class CartUI extends JFrame {
         setTitle("Your Cart");
         setSize(600, 500);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         // Title
@@ -71,13 +74,11 @@ public class CartUI extends JFrame {
             dispose();
         });
 
+        // Checkout button
         JButton checkoutButton = new JButton("Checkout");
-        checkoutButton.addActionListener(e -> {
-            int total = (int) CartDAO.getTotal();    // however your cart computes the total
-            new PaymentFrame(total);
-            dispose();
-        });
+        checkoutButton.addActionListener(e -> goToAddress());
 
+        // Back button
         buttonPanel.add(backButton);
         buttonPanel.add(checkoutButton);
 
@@ -145,5 +146,12 @@ public class CartUI extends JFrame {
         row.add(removeBtn, BorderLayout.EAST);
 
         return row;
+    }
+    /**
+     * Takes user from the cart ui to the address frame
+     */
+    private void goToAddress() {
+        new AddressFrame();  // open next frame
+        dispose();           // close the cart frame
     }
 }
