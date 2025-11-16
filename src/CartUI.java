@@ -37,7 +37,7 @@ public class CartUI extends JFrame {
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
-            new MenuFrame(0, "Menu"); // replace with real restaurant data
+            new CustomerFrame(); // replace with real restaurant data
             dispose();
         });
 
