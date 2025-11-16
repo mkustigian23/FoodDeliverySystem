@@ -1,3 +1,18 @@
+/**
+ * Documentation:
+ *
+ * This class represents an address and has getters and setters for its components.
+ *
+ * Key Fields:
+ * - streetName: The name of the street
+ * - streetNum: The street number
+ * - city: The city name
+ * - state: The state name
+ * - buildingType: Type of building
+ * - buildingName: Name of the building
+ * - apt: Apartment number
+ */
+
 public class Address {
     private String streetName;
 
