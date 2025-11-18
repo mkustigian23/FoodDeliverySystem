@@ -159,6 +159,7 @@ class LoginFrame extends JFrame implements ActionListener {
         year.setSize(90, 30);
         year.setLocation(320, 250);
         c.add(year);
+/*
 
         addrss = new JLabel("Address");
         addrss.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -172,6 +173,7 @@ class LoginFrame extends JFrame implements ActionListener {
         addrssArea.setLocation(200, 300);
         addrssArea.setLineWrap(true);
         c.add(addrssArea);
+*/
 
         terms = new JCheckBox("Accept Terms And Conditions.");
         terms.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -192,7 +194,7 @@ class LoginFrame extends JFrame implements ActionListener {
         reset.setLocation(270, 450);
         reset.addActionListener(this);
         c.add(reset);
-
+/*
         tout = new JTextArea();
         tout.setFont(new Font("Arial", Font.PLAIN, 15));
         tout.setSize(300, 400);
@@ -212,7 +214,7 @@ class LoginFrame extends JFrame implements ActionListener {
         resadd.setSize(200, 75);
         resadd.setLocation(580, 175);
         resadd.setLineWrap(true);
-        c.add(resadd);
+        c.add(resadd);*/
 
         c.setVisible(true);
     }
