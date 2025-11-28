@@ -16,7 +16,4 @@ public class BaseFrame extends JFrame {
         // Apply background color to ALL pages
         c.setBackground(new Color(230, 240, 255)); // light blue
     }
-
-    public BaseFrame() {
-    }
 }
