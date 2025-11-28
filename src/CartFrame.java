@@ -31,7 +31,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-public class CartUI extends JFrame {
+public class CartFrame extends BaseFrame {
 
     private JPanel itemsPanel;
     private JLabel totalPriceLabel;
@@ -41,7 +41,7 @@ public class CartUI extends JFrame {
      * Sets up the interface, total price, and back/checkout button
      *
      */
-    public CartUI() {
+    public CartFrame() {
         setTitle("Your Cart");
         setSize(600, 500);
         setLocationRelativeTo(null);

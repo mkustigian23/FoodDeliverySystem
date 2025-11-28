@@ -25,9 +25,9 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.sql.SQLException;
 
-public class CustomerFrame extends JFrame {
+public class CustomerFrame extends BaseFrame {
 
-    private CartUI cartPanel = new CartUI();
+    private CartFrame cartPanel = new CartFrame();
 
     /**
      * Constructs the customer Frame and initializes the GUI with all the restaurants from the database

@@ -26,7 +26,7 @@ import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MenuFrame extends JFrame {
+public class MenuFrame extends BaseFrame {
 
     private int restaurantId;
     private String restaurantName;
@@ -70,7 +70,7 @@ public class MenuFrame extends JFrame {
         nextButton.setFont(new Font("Arial", Font.PLAIN, 18));
         nextButton.addActionListener(e -> {
             // Open Next frame
-            CartUI cart = new CartUI();
+            CartFrame cart = new CartFrame();
             cart.setVisible(true);      // show the cart
             this.setVisible(false); // opens the next page
             dispose();            // closes the current MenuFrame
@@ -115,10 +115,12 @@ public class MenuFrame extends JFrame {
      * @return a JPanel representing this menu item in the UI
 
      */
+
     private JPanel createMenuItemPanel(Menu item) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        panel.setPreferredSize(new Dimension(200, 200));
+        panel.setPreferredSize(new Dimension(220, 220));
+        panel.setOpaque(false);
 
         // image
         ImageIcon icon;
@@ -130,15 +132,23 @@ public class MenuFrame extends JFrame {
 
         Image img = icon.getImage().getScaledInstance(200, 150, Image.SCALE_SMOOTH);
         JLabel imgLabel = new JLabel(new ImageIcon(img));
+        imgLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        // wrap image in a panel with padding
+        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        imagePanel.setOpaque(false);
+        imagePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        imagePanel.add(imgLabel);
 
         // name + price
         JLabel nameLabel = new JLabel(item.getName(), JLabel.CENTER);
         nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
         JLabel priceLabel = new JLabel(String.format("$%.2f", item.getPrice()), JLabel.CENTER);
+        priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
 
         panel.add(nameLabel, BorderLayout.NORTH);
-        panel.add(imgLabel, BorderLayout.CENTER);
+        panel.add(imagePanel, BorderLayout.CENTER);
         panel.add(priceLabel, BorderLayout.SOUTH);
 
         panel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -146,9 +156,7 @@ public class MenuFrame extends JFrame {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-
                 CartDAO.addItem(item);
-
                 JOptionPane.showMessageDialog(MenuFrame.this,
                         item.getName() + " added to cart!");
             }

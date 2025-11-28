@@ -20,8 +20,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
-class LoginFrame extends JFrame implements ActionListener {
+class LoginFrame extends BaseFrame implements ActionListener {
     // methods of the Frame
     private Container c;
     private JLabel title;
@@ -37,8 +38,6 @@ class LoginFrame extends JFrame implements ActionListener {
     private JComboBox date;
     private JComboBox month;
     private JComboBox year;
-    private JLabel addrss;
-    private JTextArea addrssArea;
     private JCheckBox terms;
     private JButton submit;
     private JButton reset;
@@ -81,6 +80,16 @@ class LoginFrame extends JFrame implements ActionListener {
 
         c = getContentPane();
         c.setLayout(null);
+
+        try {
+            ImageIcon icon = new ImageIcon("src/bearlogo.png");
+            Image img = icon.getImage().getScaledInstance(200, 150, Image.SCALE_SMOOTH);
+            JLabel imgLabel = new JLabel(new ImageIcon(img));
+            imgLabel.setBounds(450, 200, 200, 150);
+            c.add(imgLabel);
+        } catch (Exception e) {
+            System.out.println("Image not found: " + e.getMessage());
+        }
 
         title = new JLabel("Login/Register");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -159,21 +168,6 @@ class LoginFrame extends JFrame implements ActionListener {
         year.setSize(90, 30);
         year.setLocation(320, 250);
         c.add(year);
-/*
-
-        addrss = new JLabel("Address");
-        addrss.setFont(new Font("Arial", Font.PLAIN, 20));
-        addrss.setSize(100, 20);
-        addrss.setLocation(100, 300);
-        c.add(addrss);
-
-        addrssArea = new JTextArea();
-        addrssArea.setFont(new Font("Arial", Font.PLAIN, 15));
-        addrssArea.setSize(200, 75);
-        addrssArea.setLocation(200, 300);
-        addrssArea.setLineWrap(true);
-        c.add(addrssArea);
-*/
 
         terms = new JCheckBox("Accept Terms And Conditions.");
         terms.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -194,29 +188,9 @@ class LoginFrame extends JFrame implements ActionListener {
         reset.setLocation(270, 450);
         reset.addActionListener(this);
         c.add(reset);
-/*
-        tout = new JTextArea();
-        tout.setFont(new Font("Arial", Font.PLAIN, 15));
-        tout.setSize(300, 400);
-        tout.setLocation(500, 100);
-        tout.setLineWrap(true);
-        tout.setEditable(false);
-        c.add(tout);
-
-        res = new JLabel("");
-        res.setFont(new Font("Arial", Font.PLAIN, 20));
-        res.setSize(500, 25);
-        res.setLocation(100, 500);
-        c.add(res);
-
-        resadd = new JTextArea();
-        resadd.setFont(new Font("Arial", Font.PLAIN, 15));
-        resadd.setSize(200, 75);
-        resadd.setLocation(580, 175);
-        resadd.setLineWrap(true);
-        c.add(resadd);*/
 
         c.setVisible(true);
+
     }
 
     /**

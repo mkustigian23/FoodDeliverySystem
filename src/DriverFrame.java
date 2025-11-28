@@ -17,7 +17,7 @@ import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DriverFrame extends JFrame {
+public class DriverFrame extends BaseFrame {
     private JComboBox<String> driverCombo;
     private JTextArea deliveriesArea;
     private JButton refreshButton;

@@ -24,7 +24,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class PaymentFrame extends JFrame implements ActionListener {
+public class PaymentFrame extends BaseFrame implements ActionListener {
     private JTextField firstName;
     private JTextField lastName;
     private JTextField cardNumber;

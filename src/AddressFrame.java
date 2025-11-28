@@ -27,7 +27,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class AddressFrame extends JFrame {
+public class AddressFrame extends BaseFrame {
 
     private JTextField streetName;
     private JTextField cityName;
@@ -132,7 +132,7 @@ public class AddressFrame extends JFrame {
      * Returns user to Cart UI and closing the current Address Frame
      */
     private void goBackToCart() {
-        new CartUI();
+        new CartFrame();
         dispose();
     }
 }
