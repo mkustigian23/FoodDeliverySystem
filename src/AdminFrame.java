@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 //creates the admin frame gui
-class AdminFrame extends BaseFrame implements ActionListener {
+class AdminFrame extends JFrame implements ActionListener {
     private Container c;
     private JLabel userName;
     private JTextField userNameField;

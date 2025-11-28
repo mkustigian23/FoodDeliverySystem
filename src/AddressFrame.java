@@ -27,7 +27,10 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class AddressFrame extends BaseFrame {
+import javax.swing.*;
+import java.awt.*;
+
+public class AddressFrame extends JFrame {
 
     private JTextField streetName;
     private JTextField cityName;
@@ -42,53 +45,77 @@ public class AddressFrame extends BaseFrame {
      * Creates new Address Frame window that collects address information
      * Initializes labels, text fields, buttons, and layouts
      */
-
     public AddressFrame() {
         setTitle("Address Information");
-        setSize(600, 500);
+        setSize(600, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout(10, 10));
+
+        // Main panel with background color
+        JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
+        mainPanel.setBackground(new Color(173, 216, 230)); // light blue
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Title
+        JLabel titleLabel = new JLabel("Enter Address Details", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
 
         // Panel for form fields
         JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
+        panel.setOpaque(false); // keep background consistent
 
-        panel.add(new JLabel("Street Name:"));
+        Font labelFont = new Font("Arial", Font.PLAIN, 16);
+
+        JLabel streetLabel = new JLabel("Street Name:");
+        streetLabel.setFont(labelFont);
+        panel.add(streetLabel);
         streetName = new JTextField();
         panel.add(streetName);
 
-        panel.add(new JLabel("City:"));
+        JLabel cityLabel = new JLabel("City:");
+        cityLabel.setFont(labelFont);
+        panel.add(cityLabel);
         cityName = new JTextField();
         panel.add(cityName);
 
-        panel.add(new JLabel("State:"));
+        JLabel stateLabel = new JLabel("State:");
+        stateLabel.setFont(labelFont);
+        panel.add(stateLabel);
         stateName = new JTextField();
         panel.add(stateName);
 
-        panel.add(new JLabel("Zip Code:"));
+        JLabel zipLabel = new JLabel("Zip Code:");
+        zipLabel.setFont(labelFont);
+        panel.add(zipLabel);
         zipCode = new JTextField();
         panel.add(zipCode);
 
-        panel.add(new JLabel("Building Type:"));
+        JLabel buildingLabel = new JLabel("Building Type:");
+        buildingLabel.setFont(labelFont);
+        panel.add(buildingLabel);
         buildingType = new JTextField();
         panel.add(buildingType);
 
-        add(panel, BorderLayout.CENTER);
+        mainPanel.add(panel, BorderLayout.CENTER);
 
         // Panel for buttons
-        JPanel buttonPanel = new JPanel();
-        continueButton = new JButton("Continue");
-        backButton = new JButton("Back");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        buttonPanel.setOpaque(false);
 
-        buttonPanel.add(backButton);
+        continueButton = new JButton("Continue");
+        continueButton.setFont(new Font("Arial", Font.BOLD, 16));
+        continueButton.addActionListener(e -> continueToPayment());
         buttonPanel.add(continueButton);
 
-        add(buttonPanel, BorderLayout.SOUTH);
-
-        // Button actions
-        continueButton.addActionListener(e -> continueToPayment());
+        backButton = new JButton("Back");
+        backButton.setFont(new Font("Arial", Font.PLAIN, 16));
         backButton.addActionListener(e -> goBackToCart());
+        buttonPanel.add(backButton);
 
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        add(mainPanel);
         setVisible(true);
     }
 
@@ -96,7 +123,6 @@ public class AddressFrame extends BaseFrame {
      * Validates all address fields and continues to payment page as long as the user input all the correct
      * information
      */
-
     private void continueToPayment() {
         // Validate fields
         if (streetName.getText().trim().isEmpty() ||

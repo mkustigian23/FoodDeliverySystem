@@ -25,7 +25,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.sql.SQLException;
 
-public class CustomerFrame extends BaseFrame {
+public class CustomerFrame extends JFrame {
 
     private CartFrame cartPanel = new CartFrame();
 
@@ -43,6 +43,7 @@ public class CustomerFrame extends BaseFrame {
 
         JPanel mainPanel = new JPanel(new GridLayout(0, 3, 20, 20));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBackground(new Color(173, 216, 230));
 
         // Title
         JLabel titleLabel = new JLabel("Select a Restaurant", JLabel.CENTER);

@@ -20,9 +20,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
 
-class LoginFrame extends BaseFrame implements ActionListener {
+class LoginFrame extends JFrame implements ActionListener {
     // methods of the Frame
     private Container c;
     private JLabel title;
@@ -35,15 +34,12 @@ class LoginFrame extends BaseFrame implements ActionListener {
     private JRadioButton female;
     private ButtonGroup gengp;
     private JLabel dob;
-    private JComboBox date;
-    private JComboBox month;
-    private JComboBox year;
+    private JComboBox<String> date;
+    private JComboBox<String> month;
+    private JComboBox<String> year;
     private JCheckBox terms;
     private JButton submit;
     private JButton reset;
-    private JTextArea tout;
-    private JLabel res;
-    private JTextArea resadd;
 
     private String dates[]
             = { "1", "2", "3", "4", "5",
@@ -54,9 +50,9 @@ class LoginFrame extends BaseFrame implements ActionListener {
             "26", "27", "28", "29", "30",
             "31" };
     private String months[]
-            = { "Jan", "feb", "Mar", "Apr",
-            "May", "Jun", "July", "Aug",
-            "Sup", "Oct", "Nov", "Dec" };
+            = { "Jan", "Feb", "Mar", "Apr",
+            "May", "Jun", "Jul", "Aug",
+            "Sep", "Oct", "Nov", "Dec" };
     private String years[]
             = { "1995", "1996", "1997", "1998",
             "1999", "2000", "2001", "2002",
@@ -71,8 +67,7 @@ class LoginFrame extends BaseFrame implements ActionListener {
      * Initializes the GUI with all fields, label, buttons, and default values.
      * Sets up the layout and action listeners for submit and reset buttons
      */
-    public LoginFrame()
-    {
+    public LoginFrame() {
         setTitle("BSU Eats Delivery App");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -81,116 +76,117 @@ class LoginFrame extends BaseFrame implements ActionListener {
         c = getContentPane();
         c.setLayout(null);
 
+        c.setBackground(new Color(173, 216, 230)); // light blue
+
         try {
             ImageIcon icon = new ImageIcon("src/bearlogo.png");
             Image img = icon.getImage().getScaledInstance(200, 150, Image.SCALE_SMOOTH);
             JLabel imgLabel = new JLabel(new ImageIcon(img));
-            imgLabel.setBounds(450, 200, 200, 150);
+            imgLabel.setBounds(600, 100, 200, 150);
             c.add(imgLabel);
         } catch (Exception e) {
             System.out.println("Image not found: " + e.getMessage());
         }
 
-        title = new JLabel("Login/Register");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 40);
-        title.setLocation(300, 40);
+        title = new JLabel("Login / Register");
+        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setSize(400, 40);
+        title.setLocation(300, 30);
         c.add(title);
 
-        userName = new JLabel("Username");
+        userName = new JLabel("Username:");
         userName.setFont(new Font("Arial", Font.PLAIN, 20));
-        userName.setSize(100, 20);
+        userName.setSize(120, 25);
         userName.setLocation(100, 100);
         c.add(userName);
 
         userNameField = new JTextField();
-        userNameField.setFont(new Font("Arial", Font.PLAIN, 15));
-        userNameField.setSize(190, 20);
-        userNameField.setLocation(200, 100);
+        userNameField.setFont(new Font("Arial", Font.PLAIN, 16));
+        userNameField.setSize(200, 25);
+        userNameField.setLocation(230, 100);
         c.add(userNameField);
 
-        password = new JLabel("Password");
+        password = new JLabel("Password:");
         password.setFont(new Font("Arial", Font.PLAIN, 20));
-        password.setSize(100, 20);
+        password.setSize(120, 25);
         password.setLocation(100, 150);
         c.add(password);
 
         passwordField = new JTextField();
-        passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
-        passwordField.setSize(150, 20);
-        passwordField.setLocation(200, 150);
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
+        passwordField.setSize(200, 25);
+        passwordField.setLocation(230, 150);
         c.add(passwordField);
 
-        gender = new JLabel("Gender");
+        gender = new JLabel("Gender:");
         gender.setFont(new Font("Arial", Font.PLAIN, 20));
-        gender.setSize(100, 20);
+        gender.setSize(120, 25);
         gender.setLocation(100, 200);
         c.add(gender);
 
         male = new JRadioButton("Male");
-        male.setFont(new Font("Arial", Font.PLAIN, 15));
+        male.setFont(new Font("Arial", Font.PLAIN, 16));
         male.setSelected(true);
-        male.setSize(75, 20);
-        male.setLocation(200, 200);
+        male.setSize(80, 25);
+        male.setLocation(230, 200);
         c.add(male);
 
         female = new JRadioButton("Female");
-        female.setFont(new Font("Arial", Font.PLAIN, 15));
+        female.setFont(new Font("Arial", Font.PLAIN, 16));
         female.setSelected(false);
-        female.setSize(80, 20);
-        female.setLocation(275, 200);
+        female.setSize(100, 25);
+        female.setLocation(320, 200);
         c.add(female);
 
         gengp = new ButtonGroup();
         gengp.add(male);
         gengp.add(female);
 
-        dob = new JLabel("DOB");
+        dob = new JLabel("DOB:");
         dob.setFont(new Font("Arial", Font.PLAIN, 20));
-        dob.setSize(100, 20);
+        dob.setSize(120, 25);
         dob.setLocation(100, 250);
         c.add(dob);
 
-        date = new JComboBox(dates);
+        date = new JComboBox<>(dates);
         date.setFont(new Font("Arial", Font.PLAIN, 15));
         date.setSize(70, 30);
-        date.setLocation(200, 250);
+        date.setLocation(230, 250);
         c.add(date);
 
-        month = new JComboBox(months);
+        month = new JComboBox<>(months);
         month.setFont(new Font("Arial", Font.PLAIN, 15));
-        month.setSize(80, 30);
-        month.setLocation(250, 250);
+        month.setSize(90, 30);
+        month.setLocation(310, 250);
         c.add(month);
 
-        year = new JComboBox(years);
+        year = new JComboBox<>(years);
         year.setFont(new Font("Arial", Font.PLAIN, 15));
-        year.setSize(90, 30);
-        year.setLocation(320, 250);
+        year.setSize(100, 30);
+        year.setLocation(410, 250);
         c.add(year);
 
-        terms = new JCheckBox("Accept Terms And Conditions.");
+        terms = new JCheckBox("Accept Terms and Conditions");
         terms.setFont(new Font("Arial", Font.PLAIN, 15));
-        terms.setSize(250, 20);
-        terms.setLocation(150, 400);
+        terms.setSize(250, 25);
+        terms.setLocation(150, 350);
         c.add(terms);
 
         submit = new JButton("Submit");
-        submit.setFont(new Font("Arial", Font.PLAIN, 15));
-        submit.setSize(100, 20);
-        submit.setLocation(150, 450);
+        submit.setFont(new Font("Arial", Font.BOLD, 16));
+        submit.setSize(120, 30);
+        submit.setLocation(150, 400);
         submit.addActionListener(this);
         c.add(submit);
 
         reset = new JButton("Reset");
-        reset.setFont(new Font("Arial", Font.PLAIN, 15));
-        reset.setSize(100, 20);
-        reset.setLocation(270, 450);
+        reset.setFont(new Font("Arial", Font.PLAIN, 16));
+        reset.setSize(120, 30);
+        reset.setLocation(300, 400);
         reset.addActionListener(this);
         c.add(reset);
 
         c.setVisible(true);
-
     }
 
     /**
@@ -200,17 +196,12 @@ class LoginFrame extends BaseFrame implements ActionListener {
      * @param e the ActionEvent triggered by a button click
      */
     public void actionPerformed(ActionEvent e) {
-
         String username = userNameField.getText();
         String password = passwordField.getText();
 
-        // ==========================
-        //     LOGIN REDIRECTION
-        // ==========================
         Integer accountType = Authenticator.checkLogin(username, password);
 
         if (accountType != null) {
-
             JOptionPane.showMessageDialog(null, "Login successful!");
 
             // close login window
@@ -234,12 +225,9 @@ class LoginFrame extends BaseFrame implements ActionListener {
                     //r.setVisible(true);
                 }
             }
-
             return; // EXIT HERE so your registration code does not run after login
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Invalid username or password");
         }
-
     }
 }

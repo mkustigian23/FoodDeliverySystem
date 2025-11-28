@@ -31,7 +31,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-public class CartFrame extends BaseFrame {
+public class CartFrame extends JFrame {
 
     private JPanel itemsPanel;
     private JLabel totalPriceLabel;
@@ -46,49 +46,58 @@ public class CartFrame extends BaseFrame {
         setSize(600, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+
+        // Main panel with background color
+        JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
+        mainPanel.setBackground(new Color(173, 216, 230)); // light blue
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Title
         JLabel title = new JLabel("Your Cart", JLabel.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 24));
-        add(title, BorderLayout.NORTH);
+        mainPanel.add(title, BorderLayout.NORTH);
 
         // Scrollable items panel
         itemsPanel = new JPanel(new GridLayout(0, 1, 10, 10));
+        itemsPanel.setOpaque(false); // keep background consistent
         itemsPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
+        mainPanel.add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
 
         // Bottom section with total and buttons
         JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.setOpaque(false);
 
         totalPriceLabel = new JLabel("Total: $" + String.format("%.2f", CartDAO.getTotal()));
         totalPriceLabel.setFont(new Font("Arial", Font.BOLD, 18));
         totalPriceLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         bottomPanel.add(totalPriceLabel, BorderLayout.WEST);
 
-        JPanel buttonPanel = new JPanel();
+        // Buttons panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        buttonPanel.setOpaque(false);
 
         JButton backButton = new JButton("Back");
+        backButton.setFont(new Font("Arial", Font.PLAIN, 16));
         backButton.addActionListener(e -> {
             new CustomerFrame(); // replace with real restaurant data
             dispose();
         });
 
-        // Checkout button
         JButton checkoutButton = new JButton("Checkout");
+        checkoutButton.setFont(new Font("Arial", Font.BOLD, 16));
         checkoutButton.addActionListener(e -> goToAddress());
 
-        // Back button
         buttonPanel.add(backButton);
         buttonPanel.add(checkoutButton);
 
         bottomPanel.add(buttonPanel, BorderLayout.EAST);
-        add(bottomPanel, BorderLayout.SOUTH);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        add(mainPanel);
 
         refreshCartDisplay();
 
         setVisible(true);
-
     }
 
     /**
@@ -97,14 +106,15 @@ public class CartFrame extends BaseFrame {
      *
      * This method is called when the items in the cart change like if an item is removed from the cart
      */
-
     private void refreshCartDisplay() {
         itemsPanel.removeAll();
 
         List<Menu> items = CartDAO.getItems();
 
         if (items.isEmpty()) {
-            itemsPanel.add(new JLabel("Your cart is empty.", JLabel.CENTER));
+            JLabel emptyLabel = new JLabel("Your cart is empty.", JLabel.CENTER);
+            emptyLabel.setFont(new Font("Arial", Font.ITALIC, 16));
+            itemsPanel.add(emptyLabel);
         } else {
             for (Menu item : items) {
                 itemsPanel.add(createCartItemRow(item));
@@ -126,6 +136,7 @@ public class CartFrame extends BaseFrame {
      */
     private JPanel createCartItemRow(Menu item) {
         JPanel row = new JPanel(new BorderLayout());
+        row.setOpaque(false);
         row.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         row.setPreferredSize(new Dimension(400, 50));
 
@@ -138,6 +149,7 @@ public class CartFrame extends BaseFrame {
         row.add(priceLabel, BorderLayout.CENTER);
 
         JButton removeBtn = new JButton("Remove");
+        removeBtn.setFont(new Font("Arial", Font.PLAIN, 14));
         removeBtn.addActionListener((ActionEvent e) -> {
             CartDAO.removeItem(item);
             refreshCartDisplay();
@@ -147,6 +159,7 @@ public class CartFrame extends BaseFrame {
 
         return row;
     }
+
     /**
      * Takes user from the cart ui to the address frame
      */
