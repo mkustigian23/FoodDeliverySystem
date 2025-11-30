@@ -123,17 +123,22 @@ public class PaymentFrame extends JFrame implements ActionListener {
         //logout button
         JButton logoutButton = new JButton("Logout");
         logoutButton.addActionListener(e -> {
+
+            // Clear cart or session
             CartDAO.clearCart();
-            // Close all open dialogs if needed
-            for (Window window : Window.getWindows()) {
-                if (window instanceof JDialog) {
-                    window.dispose();
+            LoginDAO.logout();
+
+            // Close EVERY window except the new LoginFrame
+            for (Window w : Window.getWindows()) {
+                if (w instanceof JFrame || w instanceof JDialog) {
+                    w.dispose();
                 }
             }
 
-            LoginDAO.logout();
-            dispose();                 // close CustomerFrame
-            SwingUtilities.invokeLater(LoginFrame::new);
+            // Open LoginFrame AFTER all are closed
+            SwingUtilities.invokeLater(() -> {
+                new LoginFrame().setVisible(true);
+            });
         });
 
         // Status label

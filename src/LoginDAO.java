@@ -13,8 +13,6 @@
  * - logout(): Logs out the current user by clearing the session information
  * - createTable(): Creates the logins table
  * - insert(String username, String password, int account_type): Inserts a new user into the logins table
- * - validateLogin(String username, String password): Validates a user's login credentials against the logins table
- *   in the database
  * - insertDefaultUsers(): Inserts default demo users into the logins table
  */
 
@@ -87,34 +85,6 @@ public class LoginDAO {
             pstmt.setInt(3, account_type);
             pstmt.executeUpdate();
         }
-    }
-
-    /**
-     * Validates a user's login credentials against the logins table in the database
-     * @param username username the user enters
-     * @param password password the user enters
-     * @return the account type of the user if the login is successful
-     */
-    public int validateLogin(String username, String password) {
-        String sql = "SELECT account_type FROM logins WHERE username = ? AND password = ?";
-
-        try (Connection conn = DatabaseManager.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                currentUser = username;
-                currentAccountType = rs.getInt("account_type");
-                return currentAccountType;
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Login error: " + e.getMessage());
-        }
-        return -1;
     }
 
     // ========================================
