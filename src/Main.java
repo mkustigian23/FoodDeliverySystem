@@ -22,7 +22,6 @@ public class Main {
             loginDAO.insertDefaultUsers();
 
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
