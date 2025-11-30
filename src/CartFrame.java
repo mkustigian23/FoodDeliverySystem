@@ -12,7 +12,7 @@
  * - Allows the user to go back to the previous page or go to the payment page
  *
  * Key Methods:
- * CartUI():
+ * CartFrame(JFrame parent):
  * - Constructor that builds the carts UI, loads items, and sets up the total price, item list, and back/checkout buttons
  *
  * refreshCartDisplay():
@@ -31,7 +31,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-public class CartFrame extends JFrame {
+public class CartFrame extends JDialog {
 
     private JPanel itemsPanel;
     private JLabel totalPriceLabel;
@@ -40,12 +40,13 @@ public class CartFrame extends JFrame {
      * Constructs the CartUI window that shows all items that are added to the cart.
      * Sets up the interface, total price, and back/checkout button
      *
+     * @param parent refers to the parent window that opens the cart
      */
-    public CartFrame() {
+    public CartFrame(JFrame parent) {
         setTitle("Your Cart");
-        setSize(600, 500);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Main panel with background color
         JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
@@ -83,6 +84,22 @@ public class CartFrame extends JFrame {
             dispose();
         });
 
+        //logout button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+            CartDAO.clearCart();
+            // Close all open dialogs if needed
+            for (Window window : Window.getWindows()) {
+                if (window instanceof JDialog) {
+                    window.dispose();
+                }
+            }
+
+            LoginDAO.logout();
+            dispose();                 // close CustomerFrame
+            SwingUtilities.invokeLater(LoginFrame::new);
+        });
+
         JButton checkoutButton = new JButton("Checkout");
         checkoutButton.setFont(new Font("Arial", Font.BOLD, 16));
         checkoutButton.addActionListener(e -> goToAddress());
@@ -94,6 +111,7 @@ public class CartFrame extends JFrame {
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
+        add(logoutButton, BorderLayout.SOUTH);
 
         refreshCartDisplay();
 

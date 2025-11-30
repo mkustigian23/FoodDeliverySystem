@@ -137,7 +137,25 @@ class AdminFrame extends JFrame implements ActionListener {
         resadd.setLineWrap(true);
         c.add(resadd);
 
-        c.setVisible(true);
+
+        // logout button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        logoutButton.setSize(100, 30);           // width x height
+        logoutButton.setLocation(400, 500);      // x, y position
+        logoutButton.addActionListener(e -> {
+            for (Window window : Window.getWindows()) {
+                if (window instanceof JDialog) {
+                    window.dispose();
+                }
+            }
+            new LoginDAO().logout();
+            dispose();
+            SwingUtilities.invokeLater(() -> new LoginFrame());
+        });
+        c.add(logoutButton);
+
+        setVisible(true);
     }
 
     /**
@@ -150,16 +168,16 @@ class AdminFrame extends JFrame implements ActionListener {
             // Validate account type selection
             if (customer.isSelected() && driver.isSelected() || customer.isSelected() && restaurant.isSelected() || driver.isSelected() && restaurant.isSelected()) {
                 res.setText("Please select only" +
-                        "one account type");
+                        " one account type");
             } else if (!customer.isSelected() && !driver.isSelected() && !restaurant.isSelected()) {
                 res.setText("Please select an" +
-                        "account type");
+                        " account type");
             } else if(userNameField.getText().equals("")) {
                 res.setText("Please input a" +
-                        "username");
+                        " username");
             } else if(passwordField.getText().equals("")) {
                 res.setText("Please input a" +
-                        "Password");
+                        " Password");
             }else {
                 if (customer.isSelected()) {
                     try {

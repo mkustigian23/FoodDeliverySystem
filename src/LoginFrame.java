@@ -187,6 +187,7 @@ class LoginFrame extends JFrame implements ActionListener {
         c.add(reset);
 
         c.setVisible(true);
+        this.setVisible(true);
     }
 
     /**

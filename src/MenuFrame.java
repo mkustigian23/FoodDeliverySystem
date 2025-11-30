@@ -74,9 +74,25 @@ public class MenuFrame extends JFrame {
         JButton nextButton = new JButton("Next");
         nextButton.setFont(new Font("Arial", Font.BOLD, 16));
         nextButton.addActionListener(e -> {
-            CartFrame cart = new CartFrame();
+            CartFrame cart = new CartFrame(this);
             cart.setVisible(true);
             dispose();
+        });
+
+        //logout button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+            CartDAO.clearCart();
+            // Close all open dialogs if needed
+            for (Window window : Window.getWindows()) {
+                if (window instanceof JDialog) {
+                    window.dispose();
+                }
+            }
+
+            LoginDAO.logout();
+            dispose();                 // close CustomerFrame
+            SwingUtilities.invokeLater(LoginFrame::new);
         });
 
         // Bottom panel with next button
@@ -110,6 +126,8 @@ public class MenuFrame extends JFrame {
         mainPanel.add(new JScrollPane(gridPanel), BorderLayout.CENTER);
 
         add(mainPanel);
+        add(logoutButton, BorderLayout.SOUTH);
+
         setVisible(true);
     }
 
