@@ -70,20 +70,20 @@ class AdminFrame extends JFrame implements ActionListener {
 
         // Password label and field
         password = new JLabel("Password");
-        password.setFont(new Font("Ariel", Font.PLAIN, 20));
+        password.setFont(new Font("Arial", Font.PLAIN, 20));
         password.setSize(200, 40);
         password.setLocation(150, 250);
         c.add(password);
 
         passwordField = new JTextField();
-        passwordField.setFont(new Font("Ariel", Font.PLAIN, 15));
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordField.setSize(400, 40);
         passwordField.setLocation(250, 250);
         c.add(passwordField);
 
         // Account type label and radio buttons
         accountType = new JLabel("Account Type");
-        accountType.setFont((new Font("Ariel", Font.PLAIN, 20)));
+        accountType.setFont((new Font("Arial", Font.PLAIN, 20)));
         accountType.setSize(200, 40);
         accountType.setLocation(375, 300);
         c.add(accountType);
@@ -130,12 +130,6 @@ class AdminFrame extends JFrame implements ActionListener {
         res.setLocation(100, 500);
         c.add(res);
 
-        resadd = new JTextArea();
-        resadd.setFont(new Font("Arial", Font.PLAIN, 15));
-        resadd.setSize(200, 75);
-        resadd.setLocation(580, 175);
-        resadd.setLineWrap(true);
-        c.add(resadd);
 
 
         // logout button
