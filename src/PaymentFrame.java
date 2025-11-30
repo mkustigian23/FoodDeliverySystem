@@ -123,7 +123,7 @@ public class PaymentFrame extends JFrame implements ActionListener {
         // Status label
         statusLabel = new JLabel("", JLabel.CENTER);
         statusLabel.setFont(new Font("Arial", Font.ITALIC, 14));
-        mainPanel.add(statusLabel, BorderLayout.AFTER_LAST_LINE);
+        mainPanel.add(statusLabel, BorderLayout.NORTH);
 
         add(mainPanel);
         setVisible(true);

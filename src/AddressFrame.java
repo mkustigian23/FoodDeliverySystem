@@ -29,6 +29,7 @@ import java.awt.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class AddressFrame extends JFrame {
 
@@ -105,7 +106,7 @@ public class AddressFrame extends JFrame {
 
         continueButton = new JButton("Continue");
         continueButton.setFont(new Font("Arial", Font.BOLD, 16));
-        continueButton.addActionListener(e -> continueToPayment());
+        continueButton.addActionListener(this::continueToPayment);
         buttonPanel.add(continueButton);
 
         backButton = new JButton("Back");
@@ -122,19 +123,33 @@ public class AddressFrame extends JFrame {
     /**
      * Validates all address fields and continues to payment page as long as the user input all the correct
      * information
+     * @param e the ActionEvent becomes triggered when the user clicks the continue to payment button
      */
-    private void continueToPayment() {
+    private void continueToPayment(ActionEvent e) {
         // Validate fields
-        if (streetName.getText().trim().isEmpty() ||
-                cityName.getText().trim().isEmpty() ||
-                stateName.getText().trim().isEmpty() ||
-                zipCode.getText().trim().isEmpty() ||
-                !zipCode.getText().trim().matches("\\d{5}") ||
-                buildingType.getText().trim().isEmpty()) {
+        if (e.getSource() == continueButton) {
+            if (streetName.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter your Street name.");
+                return;
+            }
+            if (cityName.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter your City name.");
+                return;
+            }
+            if (stateName.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter your State name.");
+                return;
+            }
+            String exp = zipCode.getText().trim();
+            if (!exp.matches("\\d{5}")) {
+                JOptionPane.showMessageDialog(this, "Zip Code must be 5 digits.");
+                return;
+            }
+            if (buildingType.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter your Building Type.");
+                return;
+            }
 
-            JOptionPane.showMessageDialog(this, "Please fill out all fields correctly.",
-                    "Incomplete Address", JOptionPane.WARNING_MESSAGE);
-            return;
         }
 
         // Create address object
