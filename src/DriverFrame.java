@@ -25,6 +25,7 @@ public class DriverFrame extends JFrame {
     private DriverDAO driverDAO;
     private DeliveryDAO deliveryDAO;
 
+    protected Container c;
     /**
      *
      * Constructs the driver frame window and initializes all the UI components
@@ -34,7 +35,10 @@ public class DriverFrame extends JFrame {
         setTitle("BSU Eats - Driver Dashboard");
         setBounds(300, 90, 700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        c.setLayout(new BorderLayout());
+        c = getContentPane();
+
+
 
         driverDAO = new DriverDAO();
         deliveryDAO = new DeliveryDAO();

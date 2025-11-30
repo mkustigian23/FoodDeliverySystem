@@ -27,7 +27,7 @@ import java.sql.SQLException;
 
 public class CustomerFrame extends JFrame {
 
-    private CartUI cartPanel = new CartUI();
+    private CartFrame cartPanel = new CartFrame();
 
     /**
      * Constructs the customer Frame and initializes the GUI with all the restaurants from the database
@@ -43,6 +43,7 @@ public class CustomerFrame extends JFrame {
 
         JPanel mainPanel = new JPanel(new GridLayout(0, 3, 20, 20));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBackground(new Color(173, 216, 230));
 
         // Title
         JLabel titleLabel = new JLabel("Select a Restaurant", JLabel.CENTER);

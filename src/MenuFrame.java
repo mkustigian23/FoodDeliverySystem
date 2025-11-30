@@ -46,10 +46,14 @@ public class MenuFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // title at top
+        // Main panel with background color
+        JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
+        mainPanel.setBackground(new Color(173, 216, 230)); // light blue
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Title at top
         JLabel titleLabel = new JLabel("Menu for " + restaurantName, JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
-        add(titleLabel, BorderLayout.NORTH);
 
         // Back button
         JButton backButton = new JButton("Back");
@@ -59,33 +63,32 @@ public class MenuFrame extends JFrame {
             dispose();            // closes the current MenuFrame
         });
 
-        // Add the button to the NORTH
+        // Top panel with title + back button
         JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setOpaque(false);
         topPanel.add(backButton, BorderLayout.WEST);
         topPanel.add(titleLabel, BorderLayout.CENTER);
-        add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(topPanel, BorderLayout.NORTH);
 
         // Next button
         JButton nextButton = new JButton("Next");
-        nextButton.setFont(new Font("Arial", Font.PLAIN, 18));
+        nextButton.setFont(new Font("Arial", Font.BOLD, 16));
         nextButton.addActionListener(e -> {
-            // Open Next frame
-            CartUI cart = new CartUI();
-            cart.setVisible(true);      // show the cart
-            this.setVisible(false); // opens the next page
-            dispose();            // closes the current MenuFrame
+            CartFrame cart = new CartFrame();
+            cart.setVisible(true);
+            dispose();
         });
 
-        // Add the button to the SOUTH
-        JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(nextButton, BorderLayout.SOUTH);
-        bottomPanel.add(titleLabel, BorderLayout.CENTER);
-        add(bottomPanel, BorderLayout.SOUTH);
+        // Bottom panel with next button
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        bottomPanel.setOpaque(false);
+        bottomPanel.add(nextButton);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-
-        // panel for menu grid
-        JPanel mainPanel = new JPanel(new GridLayout(0, 2, 20, 20));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        // Panel for menu grid
+        JPanel gridPanel = new JPanel(new GridLayout(0, 2, 20, 20));
+        gridPanel.setOpaque(false);
+        gridPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         MenuDAO dao = new MenuDAO();
         List<Menu> menuItems;
@@ -99,12 +102,14 @@ public class MenuFrame extends JFrame {
             menuItems = List.of();
         }
 
-        // add menu items
+        // Add menu items
         for (Menu item : menuItems) {
-            mainPanel.add(createMenuItemPanel(item));
+            gridPanel.add(createMenuItemPanel(item));
         }
 
-        add(new JScrollPane(mainPanel), BorderLayout.CENTER);
+        mainPanel.add(new JScrollPane(gridPanel), BorderLayout.CENTER);
+
+        add(mainPanel);
         setVisible(true);
     }
 
@@ -113,12 +118,12 @@ public class MenuFrame extends JFrame {
      *
      * @param item the menu object containing the food details (name, price, image)
      * @return a JPanel representing this menu item in the UI
-
      */
     private JPanel createMenuItemPanel(Menu item) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        panel.setPreferredSize(new Dimension(200, 200));
+        panel.setPreferredSize(new Dimension(220, 220));
+        panel.setOpaque(false);
 
         // image
         ImageIcon icon;
@@ -130,15 +135,23 @@ public class MenuFrame extends JFrame {
 
         Image img = icon.getImage().getScaledInstance(200, 150, Image.SCALE_SMOOTH);
         JLabel imgLabel = new JLabel(new ImageIcon(img));
+        imgLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        // wrap image in a panel with padding
+        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        imagePanel.setOpaque(false);
+        imagePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        imagePanel.add(imgLabel);
 
         // name + price
         JLabel nameLabel = new JLabel(item.getName(), JLabel.CENTER);
         nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
         JLabel priceLabel = new JLabel(String.format("$%.2f", item.getPrice()), JLabel.CENTER);
+        priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
 
         panel.add(nameLabel, BorderLayout.NORTH);
-        panel.add(imgLabel, BorderLayout.CENTER);
+        panel.add(imagePanel, BorderLayout.CENTER);
         panel.add(priceLabel, BorderLayout.SOUTH);
 
         panel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -146,9 +159,7 @@ public class MenuFrame extends JFrame {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-
                 CartDAO.addItem(item);
-
                 JOptionPane.showMessageDialog(MenuFrame.this,
                         item.getName() + " added to cart!");
             }

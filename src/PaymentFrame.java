@@ -30,10 +30,10 @@ public class PaymentFrame extends JFrame implements ActionListener {
     private JTextField cardNumber;
     private JTextField expiration;
     private JTextField cvv;
-
     private JTextField totalAmount;
 
     private JButton payButton;
+    private JButton backButton;
     private JLabel statusLabel;
     private Payment payment;
     private Address address;
@@ -49,59 +49,84 @@ public class PaymentFrame extends JFrame implements ActionListener {
      */
     public PaymentFrame(int totalFromCart, Address address) {
 
-        this.total = totalFromCart;  // save the total
+        this.total = totalFromCart;
         this.address = address;
-
-
-        payment = new Payment(total); // pass total into payment
+        payment = new Payment(total);
 
         setTitle("Payment Information");
-        setBounds(300, 90, 900, 600);
+        setSize(600, 400);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(9, 2, 10, 10));
 
-        add(new JLabel("First Name:"));
+        // Main panel with background color
+        JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
+        mainPanel.setBackground(new Color(173, 216, 230)); // light blue
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Title
+        JLabel titleLabel = new JLabel("Enter Payment Details", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
+
+        // Form panel
+        JPanel formPanel = new JPanel(new GridLayout(6, 2, 10, 10));
+        formPanel.setOpaque(false); // keep background consistent
+
+        Font labelFont = new Font("Arial", Font.PLAIN, 16);
+
+        formPanel.add(new JLabel("First Name:")).setFont(labelFont);
         firstName = new JTextField();
-        add(firstName);
+        formPanel.add(firstName);
 
-        add(new JLabel("Last Name:"));
+        formPanel.add(new JLabel("Last Name:")).setFont(labelFont);
         lastName = new JTextField();
-        add(lastName);
+        formPanel.add(lastName);
 
-        add(new JLabel("Card Number:"));
+        formPanel.add(new JLabel("Card Number:")).setFont(labelFont);
         cardNumber = new JTextField();
-        add(cardNumber);
+        formPanel.add(cardNumber);
 
-        add(new JLabel("Expiration Date (MM/YY):"));
+        formPanel.add(new JLabel("Expiration (MM/YY):")).setFont(labelFont);
         expiration = new JTextField();
-        add(expiration);
+        formPanel.add(expiration);
 
-        add(new JLabel("CVV:"));
+        formPanel.add(new JLabel("CVV:")).setFont(labelFont);
         cvv = new JTextField();
-        add(cvv);
+        formPanel.add(cvv);
 
-        add(new JLabel("Amount:"));
+        formPanel.add(new JLabel("Amount:")).setFont(labelFont);
         totalAmount = new JTextField(String.valueOf(total));
-        totalAmount.setEditable(false);  // amount should not be editable
-        add(totalAmount);
+        totalAmount.setEditable(false);
+        formPanel.add(totalAmount);
+
+        mainPanel.add(formPanel, BorderLayout.CENTER);
+
+        // Buttons panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        buttonPanel.setOpaque(false);
 
         payButton = new JButton("Pay Now");
+        payButton.setFont(new Font("Arial", Font.BOLD, 16));
         payButton.addActionListener(this);
-        add(payButton);
+        buttonPanel.add(payButton);
 
-        statusLabel = new JLabel("");
-        add(statusLabel);
-
-        JButton backButton = new JButton("Back");
-        backButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        backButton = new JButton("Back");
+        backButton.setFont(new Font("Arial", Font.PLAIN, 16));
         backButton.addActionListener(e -> {
-            new AddressFrame(); // opens the previous frame
-            dispose();            // closes the current MenuFrame
+            new AddressFrame();
+            dispose();
         });
-        add(backButton);   // Adds the back button
+        buttonPanel.add(backButton);
 
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Status label
+        statusLabel = new JLabel("", JLabel.CENTER);
+        statusLabel.setFont(new Font("Arial", Font.ITALIC, 14));
+        mainPanel.add(statusLabel, BorderLayout.AFTER_LAST_LINE);
+
+        add(mainPanel);
         setVisible(true);
-
     }
 
     /**
@@ -109,37 +134,26 @@ public class PaymentFrame extends JFrame implements ActionListener {
      * Makes sure all fields for payment information are entered (name, card number, expiration date, cvv)
      * @param e the ActionEvent becomes triggered when the user clicks the Pay Now button
      */
-    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == payButton) {
-
-            // Makes sure the user enters their first name
             if (firstName.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please enter your first name.");
                 return;
             }
-
-            // Makes sure the user enters their last name
-            if(lastName.getText().trim().isEmpty()) {
+            if (lastName.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please enter your last name.");
                 return;
             }
-
-            // Makes sure the user enters their card number
             String card = cardNumber.getText().trim();
             if (!card.matches("\\d{16}")) {
                 JOptionPane.showMessageDialog(this, "Card number must be 16 digits.");
                 return;
             }
-
-            // Makes sure the user enters their expiration date
             String exp = expiration.getText().trim();
             if (!exp.matches("(0[1-9]|1[0-2])\\/\\d{2}")) {
                 JOptionPane.showMessageDialog(this, "Expiration must be in MM/YY format.");
                 return;
             }
-
-            // Makes sure the user enters their cvv number
             String cvvText = cvv.getText().trim();
             if (!cvvText.matches("\\d{3,4}")) {
                 JOptionPane.showMessageDialog(this, "CVV must be 3 or 4 digits.");
@@ -147,12 +161,12 @@ public class PaymentFrame extends JFrame implements ActionListener {
             }
 
             payment.purchase();
-
             JOptionPane.showMessageDialog(this, payment.sendReceipt());
             statusLabel.setText("Payment successful!");
         }
     }
 }
+
 
 
 
