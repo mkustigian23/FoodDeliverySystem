@@ -157,7 +157,8 @@ public class AddressFrame extends JFrame {
         address.setStreetName(streetName.getText().trim());
         address.setCity(cityName.getText().trim());
         address.setState(stateName.getText().trim());
-        address.setBulidingType(buildingType.getText().trim());
+        address.setZipCode(zipCode.getText().trim());          // ✅ added connection
+        address.setBuildingType(buildingType.getText().trim()); // ✅ spelling fixed
 
         // Get total from cart
         int total = (int) CartDAO.getTotal();

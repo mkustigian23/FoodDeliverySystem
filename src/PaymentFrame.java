@@ -23,7 +23,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
+import java.util.List;
+
 
 public class PaymentFrame extends JFrame implements ActionListener {
     private JTextField firstName;
@@ -164,6 +165,13 @@ public class PaymentFrame extends JFrame implements ActionListener {
             payment.purchase();
             JOptionPane.showMessageDialog(this, payment.sendReceipt());
             statusLabel.setText("Payment successful!");
+
+            // ✅ Merge cart items into DriverFrame
+            List<Menu> items = CartDAO.getItems();
+            new DriverFrame(items);
+
+            CartDAO.clearCart();
+            dispose();
         }
     }
 }

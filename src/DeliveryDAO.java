@@ -189,5 +189,23 @@ public class DeliveryDAO {
             }
         }
     }
+
+
+    /**
+     * Updates a delivery record to mark it as accepted by a driver.
+     *
+     * @param driverId the id of the driver accepting the job
+     * @param deliveryId the id of the delivery being accepted
+     * @throws SQLException if a database access error occurs
+     */
+    public void acceptJob(int driverId, int deliveryId) throws SQLException {
+        String sql = "UPDATE deliveries SET driver_id = ? WHERE id = ?";
+        try (Connection conn = DatabaseManager.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, driverId);
+            pstmt.setInt(2, deliveryId);
+            pstmt.executeUpdate();
+        }
+    }
 }
 
