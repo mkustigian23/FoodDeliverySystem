@@ -79,10 +79,10 @@ class LoginFrame extends JFrame implements ActionListener {
         c.setBackground(new Color(173, 216, 230)); // light blue
 
         try {
-            ImageIcon icon = new ImageIcon("src/bearlogo.png");
-            Image img = icon.getImage().getScaledInstance(200, 150, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon("src/bear-logo.png");
+            Image img = icon.getImage().getScaledInstance(350, 250, Image.SCALE_SMOOTH);
             JLabel imgLabel = new JLabel(new ImageIcon(img));
-            imgLabel.setBounds(600, 100, 200, 150);
+            imgLabel.setBounds(600, 200, 200, 150);
             c.add(imgLabel);
         } catch (Exception e) {
             System.out.println("Image not found: " + e.getMessage());
@@ -187,6 +187,7 @@ class LoginFrame extends JFrame implements ActionListener {
         c.add(reset);
 
         c.setVisible(true);
+        this.setVisible(true);
     }
 
     /**
@@ -200,6 +201,13 @@ class LoginFrame extends JFrame implements ActionListener {
         String password = passwordField.getText();
 
         Integer accountType = Authenticator.checkLogin(username, password);
+
+        if (e.getSource() != terms) {
+            if (!terms.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Please check accept terms and conditions.");
+                return;
+            }
+        }
 
         if (accountType != null) {
             JOptionPane.showMessageDialog(null, "Login successful!");

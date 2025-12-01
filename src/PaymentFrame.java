@@ -54,7 +54,7 @@ public class PaymentFrame extends JFrame implements ActionListener {
         payment = new Payment(total);
 
         setTitle("Payment Information");
-        setSize(600, 400);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -120,12 +120,34 @@ public class PaymentFrame extends JFrame implements ActionListener {
 
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
+        //logout button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+
+            // Clear cart or session
+            CartDAO.clearCart();
+            LoginDAO.logout();
+
+            // Close EVERY window except the new LoginFrame
+            for (Window w : Window.getWindows()) {
+                if (w instanceof JFrame || w instanceof JDialog) {
+                    w.dispose();
+                }
+            }
+
+            // Open LoginFrame AFTER all are closed
+            SwingUtilities.invokeLater(() -> {
+                new LoginFrame().setVisible(true);
+            });
+        });
+
         // Status label
         statusLabel = new JLabel("", JLabel.CENTER);
         statusLabel.setFont(new Font("Arial", Font.ITALIC, 14));
         mainPanel.add(statusLabel, BorderLayout.NORTH);
 
         add(mainPanel);
+        add(logoutButton, BorderLayout.SOUTH);
         setVisible(true);
     }
 

@@ -44,6 +44,10 @@ import java.util.List;
             return cartItems;
         }
 
+        public static void clearCart() {
+            cartItems.clear();
+        }
+
         /**
          * Calculates the total amount of all the items in the cart
          *

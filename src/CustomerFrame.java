@@ -27,7 +27,7 @@ import java.sql.SQLException;
 
 public class CustomerFrame extends JFrame {
 
-    private CartFrame cartPanel = new CartFrame();
+    //private CartFrame cartPanel = new CartFrame(this);
 
     /**
      * Constructs the customer Frame and initializes the GUI with all the restaurants from the database
@@ -51,6 +51,28 @@ public class CustomerFrame extends JFrame {
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(titleLabel, BorderLayout.NORTH);
 
+        //Logout Button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+
+            // Clear cart or session
+            CartDAO.clearCart();
+            LoginDAO.logout();
+
+            // Close EVERY window except the new LoginFrame
+            for (Window w : Window.getWindows()) {
+                if (w instanceof JFrame || w instanceof JDialog) {
+                    w.dispose();
+                }
+            }
+
+            // Open LoginFrame AFTER all are closed
+            SwingUtilities.invokeLater(() -> {
+                new LoginFrame().setVisible(true);
+            });
+        });
+
+
         RestaurantDAO dao = new RestaurantDAO();
         List<Restaurant> restaurants;
         try {
@@ -68,7 +90,10 @@ public class CustomerFrame extends JFrame {
         }
 
         add(new JScrollPane(mainPanel), BorderLayout.CENTER);
+        add(logoutButton, BorderLayout.SOUTH);
+
         setVisible(true);
+
     }
 
     /**

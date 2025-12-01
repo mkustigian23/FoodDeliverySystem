@@ -33,15 +33,19 @@ public class DriverFrame extends JFrame {
 
     public DriverFrame() {
         setTitle("BSU Eats - Driver Dashboard");
-        setBounds(300, 90, 700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        c.setLayout(new BorderLayout());
+        setBounds(300, 90, 900, 600);
+
         c = getContentPane();
-
-
+        c.setLayout(new BorderLayout());
 
         driverDAO = new DriverDAO();
         deliveryDAO = new DeliveryDAO();
+
+        // Main panel with background color
+        JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
+        mainPanel.setBackground(new Color(173, 216, 230)); // light blue
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Top panel: Select driver
         JPanel topPanel = new JPanel(new FlowLayout());
@@ -49,16 +53,21 @@ public class DriverFrame extends JFrame {
 
         driverCombo = new JComboBox<>();
         topPanel.add(driverCombo);
+
         refreshButton = new JButton("Refresh Deliveries");
         topPanel.add(refreshButton);
-
-        add(topPanel, BorderLayout.NORTH);
 
         // Center panel: Delivery list
         deliveriesArea = new JTextArea();
         deliveriesArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(deliveriesArea);
-        add(scrollPane, BorderLayout.CENTER);
+
+
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Add mainPanel to frame
+        c.add(mainPanel, BorderLayout.CENTER);
 
         loadDrivers();
 
@@ -67,7 +76,28 @@ public class DriverFrame extends JFrame {
         driverCombo.addActionListener(refreshListener);
         refreshButton.addActionListener(refreshListener);
 
-        setVisible(true);
+        //logout button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+            this.setVisible(false);         // hide current frame
+            CartDAO.clearCart();
+            LoginDAO.logout();
+
+            // dispose any dialogs first
+            for (Window w : Window.getWindows()) {
+                if (w instanceof JDialog) w.dispose();
+            }
+
+            // open login frame
+            SwingUtilities.invokeLater(() -> {
+                new LoginFrame().setVisible(true);
+                this.dispose();             // dispose after login frame visible
+            });
+        });
+
+
+        c.add(logoutButton, BorderLayout.SOUTH);
+
     }
 
     /**

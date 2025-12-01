@@ -10,6 +10,7 @@
  * - Insert demo users for Admin, Customer, Driver, and Restaurant roles
  *
  * Key Methods:
+ * - logout(): Logs out the current user by clearing the session information
  * - createTable(): Creates the logins table
  * - insert(String username, String password, int account_type): Inserts a new user into the logins table
  * - insertDefaultUsers(): Inserts default demo users into the logins table
@@ -19,6 +20,22 @@ import java.sql.*;
 import java.sql.*;
 
 public class LoginDAO {
+
+    // Track logged-in user
+    private static String currentUser = null;
+    private static int currentAccountType = -1;
+
+    public static String getCurrentUser() { return currentUser; }
+    public static int getCurrentAccountType() { return currentAccountType; }
+
+    /**
+     * Logs out the current user by clearing the session information
+     * After calling this method, the app will treat the user as not logged in.
+     */
+    public static void logout() {
+        currentUser = null;
+        currentAccountType = -1;
+    }
 
     // ========================================
     // CREATE TABLE (FIXED)
