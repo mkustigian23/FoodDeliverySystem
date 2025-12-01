@@ -19,9 +19,9 @@ public class Address {
 
     private String city;
     private String state;
-    private String zipCode;        // ✅ added to support zip code validation
+    private String zipCode;
 
-    private String buildingType;   // ✅ spelling corrected
+    private String buildingType;
     private String buildingName;
     private double apt;
 
