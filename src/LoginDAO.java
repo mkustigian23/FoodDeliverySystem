@@ -95,7 +95,7 @@ public class LoginDAO {
      * @param password password the user enters
      * @return the account type of the user if the login is successful
      */
-    public boolean validateLogin(String username, String password) {
+    public static boolean validateLogin(String username, String password) {
         String sql = "SELECT account_type FROM logins WHERE username = ? AND password = ?";
 
         try (Connection conn = DatabaseManager.connect();

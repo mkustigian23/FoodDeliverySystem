@@ -12,7 +12,11 @@ import java.sql.Statement;
 public class DatabaseManager {
     // food_delivery.db is the SQLite database I have chosen for the restaurants, drivers and customers to be entered into
 
-    private static final String URL = "jdbc:sqlite:food_delivery.db";
+    private static String URL = "jdbc:sqlite:food_delivery.db";
+
+    public static void useTestDatabase() {
+        URL = "jdbc:sqlite:food_delivery_test.db";
+    }
 
     /**
      * Establishes a connection to the SQlite database

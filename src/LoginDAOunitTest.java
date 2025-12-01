@@ -1,3 +1,6 @@
+// 1. Login DAO unit test
+// 2. Login DAO unit test
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,3 +37,5 @@ public class LoginDAOunitTest {
         assertEquals(-1, LoginDAO.getCurrentAccountType(), "Account type should be reset");
     }
 }
+
+
