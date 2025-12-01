@@ -224,19 +224,25 @@ class LoginFrame extends JFrame implements ActionListener {
         String password = passwordField.getText();
 
         if (!terms.isSelected()) {
-            JOptionPane.showMessageDialog(this, "Please check accept terms and conditions.");
+            SwingUtilities.invokeLater(() ->
+            JOptionPane.showMessageDialog(this, "Please check accept terms and conditions.")
+            );
             return;
         }
 
         if (username.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Invalid username or password");
+            SwingUtilities.invokeLater(() ->
+            JOptionPane.showMessageDialog(this, "Invalid username or password")
+            );
             return;
         }
 
         Integer accountType = Authenticator.checkLogin(username, password);
 
         if (accountType != null) {
-            JOptionPane.showMessageDialog(this, "Login successful!");
+            SwingUtilities.invokeLater(() ->
+            JOptionPane.showMessageDialog(this, "Login successful!")
+            );
 
             // close login window
             this.dispose();
@@ -261,7 +267,9 @@ class LoginFrame extends JFrame implements ActionListener {
             }
             return; // EXIT HERE so your registration code does not run after login
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid username or password");
+            SwingUtilities.invokeLater(() ->
+            JOptionPane.showMessageDialog(this, "Invalid username or password")
+            );
         }
 
     }

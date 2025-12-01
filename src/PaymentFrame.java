@@ -78,27 +78,33 @@ public class PaymentFrame extends JFrame implements ActionListener {
 
         formPanel.add(new JLabel("First Name:")).setFont(labelFont);
         firstName = new JTextField();
+        firstName.setName("First Name");
         formPanel.add(firstName);
 
         formPanel.add(new JLabel("Last Name:")).setFont(labelFont);
         lastName = new JTextField();
+        lastName.setName("Last Name");
         formPanel.add(lastName);
 
         formPanel.add(new JLabel("Card Number:")).setFont(labelFont);
         cardNumber = new JTextField();
+        cardNumber.setName("Card Number");
         formPanel.add(cardNumber);
 
         formPanel.add(new JLabel("Expiration (MM/YY):")).setFont(labelFont);
         expiration = new JTextField();
+        expiration.setName("Expiration");
         formPanel.add(expiration);
 
         formPanel.add(new JLabel("CVV:")).setFont(labelFont);
         cvv = new JTextField();
+        cvv.setName("CVV");
         formPanel.add(cvv);
 
         formPanel.add(new JLabel("Amount:")).setFont(labelFont);
         totalAmount = new JTextField(String.valueOf(total));
         totalAmount.setEditable(false);
+        totalAmount.setName("Amount");
         formPanel.add(totalAmount);
 
         mainPanel.add(formPanel, BorderLayout.CENTER);
@@ -110,6 +116,7 @@ public class PaymentFrame extends JFrame implements ActionListener {
         payButton = new JButton("Pay Now");
         payButton.setFont(new Font("Arial", Font.BOLD, 16));
         payButton.addActionListener(this);
+        payButton.setName("Pay Now");
         buttonPanel.add(payButton);
 
         backButton = new JButton("Back");
@@ -166,7 +173,7 @@ public class PaymentFrame extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, payment.sendReceipt());
             statusLabel.setText("Payment successful!");
 
-            // ✅ Merge cart items into DriverFrame
+            // Merge cart items into DriverFrame
             List<Menu> items = CartDAO.getItems();
             new DriverFrame(items);
 

@@ -72,30 +72,35 @@ public class AddressFrame extends JFrame {
         streetLabel.setFont(labelFont);
         panel.add(streetLabel);
         streetName = new JTextField();
+        streetName.setName("Street Name");
         panel.add(streetName);
 
         JLabel cityLabel = new JLabel("City:");
         cityLabel.setFont(labelFont);
         panel.add(cityLabel);
         cityName = new JTextField();
+        cityName.setName("city");
         panel.add(cityName);
 
         JLabel stateLabel = new JLabel("State:");
         stateLabel.setFont(labelFont);
         panel.add(stateLabel);
         stateName = new JTextField();
+        stateName.setName("State");
         panel.add(stateName);
 
         JLabel zipLabel = new JLabel("Zip Code:");
         zipLabel.setFont(labelFont);
         panel.add(zipLabel);
         zipCode = new JTextField();
+        zipCode.setName("zipCode");
         panel.add(zipCode);
 
         JLabel buildingLabel = new JLabel("Building Type:");
         buildingLabel.setFont(labelFont);
         panel.add(buildingLabel);
         buildingType = new JTextField();
+        buildingType.setName("buildingType");
         panel.add(buildingType);
 
         mainPanel.add(panel, BorderLayout.CENTER);
@@ -107,6 +112,7 @@ public class AddressFrame extends JFrame {
         continueButton = new JButton("Continue");
         continueButton.setFont(new Font("Arial", Font.BOLD, 16));
         continueButton.addActionListener(this::continueToPayment);
+        continueButton.setName("Continue");
         buttonPanel.add(continueButton);
 
         backButton = new JButton("Back");
