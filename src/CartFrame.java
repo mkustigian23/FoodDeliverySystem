@@ -12,7 +12,7 @@
  * - Allows the user to go back to the previous page or go to the payment page
  *
  * Key Methods:
- * CartFrame(JFrame parent):
+ * CartUI():
  * - Constructor that builds the carts UI, loads items, and sets up the total price, item list, and back/checkout buttons
  *
  * refreshCartDisplay():
@@ -31,7 +31,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-public class CartFrame extends JDialog {
+public class CartFrame extends JFrame {
 
     private JPanel itemsPanel;
     private JLabel totalPriceLabel;
@@ -40,13 +40,12 @@ public class CartFrame extends JDialog {
      * Constructs the CartUI window that shows all items that are added to the cart.
      * Sets up the interface, total price, and back/checkout button
      *
-     * @param parent refers to the parent window that opens the cart
      */
-    public CartFrame(JFrame parent) {
+    public CartFrame() {
         setTitle("Your Cart");
-        setSize(800, 600);
-        setLocationRelativeTo(parent);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(600, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Main panel with background color
         JPanel mainPanel = new JPanel(new BorderLayout(15, 15));

@@ -48,7 +48,7 @@ public class AddressFrame extends JFrame {
      */
     public AddressFrame() {
         setTitle("Address Information");
-        setSize(800, 600);
+        setSize(600, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -114,31 +114,9 @@ public class AddressFrame extends JFrame {
         backButton.addActionListener(e -> goBackToCart());
         buttonPanel.add(backButton);
 
-        //Logout Button
-        JButton logoutButton = new JButton("Logout");
-        logoutButton.addActionListener(e -> {
-
-            // Clear cart or session
-            CartDAO.clearCart();
-            LoginDAO.logout();
-
-            // Close EVERY window except the new LoginFrame
-            for (Window w : Window.getWindows()) {
-                if (w instanceof JFrame || w instanceof JDialog) {
-                    w.dispose();
-                }
-            }
-
-            // Open LoginFrame AFTER all are closed
-            SwingUtilities.invokeLater(() -> {
-                new LoginFrame().setVisible(true);
-            });
-        });
-
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
-        add(logoutButton, BorderLayout.SOUTH);
         setVisible(true);
     }
 
@@ -195,7 +173,7 @@ public class AddressFrame extends JFrame {
      * Returns user to Cart UI and closing the current Address Frame
      */
     private void goBackToCart() {
-        new CartFrame(this);
+        new CartFrame();
         dispose();
     }
 }
