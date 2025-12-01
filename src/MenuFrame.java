@@ -144,6 +144,7 @@ public class MenuFrame extends JFrame {
      */
     private JPanel createMenuItemPanel(Menu item) {
         JPanel panel = new JPanel(new BorderLayout());
+        panel.setName("menuItem_" + item.getRestaurantId());
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         panel.setPreferredSize(new Dimension(220, 220));
         panel.setOpaque(false);

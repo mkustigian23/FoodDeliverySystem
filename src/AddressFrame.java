@@ -120,7 +120,30 @@ public class AddressFrame extends JFrame {
         backButton.addActionListener(e -> goBackToCart());
         buttonPanel.add(backButton);
 
+        //logout button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+
+            // Clear cart or session
+            CartDAO.clearCart();
+            LoginDAO.logout();
+
+            // Close EVERY window except the new LoginFrame
+            for (Window w : Window.getWindows()) {
+                if (w instanceof JFrame || w instanceof JDialog) {
+                    w.dispose();
+                }
+            }
+
+            // Open LoginFrame AFTER all are closed
+            SwingUtilities.invokeLater(() -> {
+                new LoginFrame().setVisible(true);
+            });
+        });
+
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        add(logoutButton, BorderLayout.SOUTH);
+
 
         add(mainPanel);
         setVisible(true);

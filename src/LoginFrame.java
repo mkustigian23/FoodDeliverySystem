@@ -224,25 +224,19 @@ class LoginFrame extends JFrame implements ActionListener {
         String password = passwordField.getText();
 
         if (!terms.isSelected()) {
-            SwingUtilities.invokeLater(() ->
-            JOptionPane.showMessageDialog(this, "Please check accept terms and conditions.")
-            );
+            JOptionPane.showMessageDialog(this, "Please check accept terms and conditions.");
             return;
         }
 
         if (username.isEmpty() || password.isEmpty()) {
-            SwingUtilities.invokeLater(() ->
-            JOptionPane.showMessageDialog(this, "Invalid username or password")
-            );
+            JOptionPane.showMessageDialog(this, "Invalid username or password");
             return;
         }
 
         Integer accountType = Authenticator.checkLogin(username, password);
 
         if (accountType != null) {
-            SwingUtilities.invokeLater(() ->
-            JOptionPane.showMessageDialog(this, "Login successful!")
-            );
+            JOptionPane.showMessageDialog(this, "Login successful!");
 
             // close login window
             this.dispose();

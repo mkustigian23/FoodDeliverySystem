@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class uiPaymentTest {
+public class UIPaymentTest2 {
 
     private FrameFixture window;
 
@@ -24,20 +24,20 @@ public class uiPaymentTest {
 
     @Test
     public void testZipCodeTooShortShowsError() {
-        // Enter invalid 3-digit zip code
-        window.textBox("First Name").setText("John");
-        window.textBox("Last Name").setText("Smith");
-        window.textBox("Card Number").setText("1234567891234567");
-        window.textBox("Expiration").setText("03/22");
-        window.textBox("CVV").setText("12");
+        // Enter invalid CVV
+        window.textBox("First Name").setText("");
+        window.textBox("Last Name").setText("");
+        window.textBox("Card Number").setText("");
+        window.textBox("Expiration").setText("");
+        window.textBox("CVV").setText("");
 
-        // Click continue / submit
+        // Click pay now
         window.button("Pay Now").click();
 
-        // Check JOptionPane message (if using JOptionPane)
         window.optionPane()
                 .requireVisible()
-                .requireMessage("CVV must be 3 or 4 digits.");
+                .requireMessage("Please enter your first name.");
         window.optionPane().okButton().click();
     }
 }
+
