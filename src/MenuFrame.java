@@ -74,7 +74,7 @@ public class MenuFrame extends JFrame {
         JButton nextButton = new JButton("Next");
         nextButton.setFont(new Font("Arial", Font.BOLD, 16));
         nextButton.addActionListener(e -> {
-            CartFrame cart = new CartFrame(this);
+            CartFrame cart = new CartFrame();
             cart.setVisible(true);
             dispose();
         });

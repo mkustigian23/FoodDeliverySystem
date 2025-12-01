@@ -23,6 +23,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+
 
 public class PaymentFrame extends JFrame implements ActionListener {
     private JTextField firstName;
@@ -120,34 +122,12 @@ public class PaymentFrame extends JFrame implements ActionListener {
 
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        //logout button
-        JButton logoutButton = new JButton("Logout");
-        logoutButton.addActionListener(e -> {
-
-            // Clear cart or session
-            CartDAO.clearCart();
-            LoginDAO.logout();
-
-            // Close EVERY window except the new LoginFrame
-            for (Window w : Window.getWindows()) {
-                if (w instanceof JFrame || w instanceof JDialog) {
-                    w.dispose();
-                }
-            }
-
-            // Open LoginFrame AFTER all are closed
-            SwingUtilities.invokeLater(() -> {
-                new LoginFrame().setVisible(true);
-            });
-        });
-
         // Status label
         statusLabel = new JLabel("", JLabel.CENTER);
         statusLabel.setFont(new Font("Arial", Font.ITALIC, 14));
         mainPanel.add(statusLabel, BorderLayout.NORTH);
 
         add(mainPanel);
-        add(logoutButton, BorderLayout.SOUTH);
         setVisible(true);
     }
 
@@ -185,6 +165,13 @@ public class PaymentFrame extends JFrame implements ActionListener {
             payment.purchase();
             JOptionPane.showMessageDialog(this, payment.sendReceipt());
             statusLabel.setText("Payment successful!");
+
+            // ✅ Merge cart items into DriverFrame
+            List<Menu> items = CartDAO.getItems();
+            new DriverFrame(items);
+
+            CartDAO.clearCart();
+            dispose();
         }
     }
 }

@@ -114,31 +114,9 @@ public class AddressFrame extends JFrame {
         backButton.addActionListener(e -> goBackToCart());
         buttonPanel.add(backButton);
 
-        //Logout Button
-        JButton logoutButton = new JButton("Logout");
-        logoutButton.addActionListener(e -> {
-
-            // Clear cart or session
-            CartDAO.clearCart();
-            LoginDAO.logout();
-
-            // Close EVERY window except the new LoginFrame
-            for (Window w : Window.getWindows()) {
-                if (w instanceof JFrame || w instanceof JDialog) {
-                    w.dispose();
-                }
-            }
-
-            // Open LoginFrame AFTER all are closed
-            SwingUtilities.invokeLater(() -> {
-                new LoginFrame().setVisible(true);
-            });
-        });
-
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
-        add(logoutButton, BorderLayout.SOUTH);
         setVisible(true);
     }
 
@@ -179,7 +157,8 @@ public class AddressFrame extends JFrame {
         address.setStreetName(streetName.getText().trim());
         address.setCity(cityName.getText().trim());
         address.setState(stateName.getText().trim());
-        address.setBulidingType(buildingType.getText().trim());
+        address.setZipCode(zipCode.getText().trim());          // ✅ added connection
+        address.setBuildingType(buildingType.getText().trim()); // ✅ spelling fixed
 
         // Get total from cart
         int total = (int) CartDAO.getTotal();
@@ -195,7 +174,7 @@ public class AddressFrame extends JFrame {
      * Returns user to Cart UI and closing the current Address Frame
      */
     private void goBackToCart() {
-        new CartFrame(this);
+        new CartFrame();
         dispose();
     }
 }
