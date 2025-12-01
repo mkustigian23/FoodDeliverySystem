@@ -104,6 +104,7 @@ class LoginFrame extends JFrame implements ActionListener {
         userNameField.setFont(new Font("Arial", Font.PLAIN, 16));
         userNameField.setSize(200, 25);
         userNameField.setLocation(230, 100);
+        userNameField.setName("userNameField");
         c.add(userNameField);
 
         password = new JLabel("Password:");
@@ -116,6 +117,7 @@ class LoginFrame extends JFrame implements ActionListener {
         passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
         passwordField.setSize(200, 25);
         passwordField.setLocation(230, 150);
+        passwordField.setName("passwordField");
         c.add(passwordField);
 
         gender = new JLabel("Gender:");
@@ -129,6 +131,7 @@ class LoginFrame extends JFrame implements ActionListener {
         male.setSelected(true);
         male.setSize(80, 25);
         male.setLocation(230, 200);
+        male.setName("Male");
         c.add(male);
 
         female = new JRadioButton("Female");
@@ -136,6 +139,7 @@ class LoginFrame extends JFrame implements ActionListener {
         female.setSelected(false);
         female.setSize(100, 25);
         female.setLocation(320, 200);
+        female.setName("Female");
         c.add(female);
 
         gengp = new ButtonGroup();
@@ -152,30 +156,35 @@ class LoginFrame extends JFrame implements ActionListener {
         date.setFont(new Font("Arial", Font.PLAIN, 15));
         date.setSize(70, 30);
         date.setLocation(230, 250);
+        date.setName("date");
         c.add(date);
 
         month = new JComboBox<>(months);
         month.setFont(new Font("Arial", Font.PLAIN, 15));
         month.setSize(90, 30);
         month.setLocation(310, 250);
+        month.setName("month");
         c.add(month);
 
         year = new JComboBox<>(years);
         year.setFont(new Font("Arial", Font.PLAIN, 15));
         year.setSize(100, 30);
         year.setLocation(410, 250);
+        year.setName("year");
         c.add(year);
 
         terms = new JCheckBox("Accept Terms and Conditions");
         terms.setFont(new Font("Arial", Font.PLAIN, 15));
         terms.setSize(250, 25);
         terms.setLocation(150, 350);
+        terms.setName("terms");
         c.add(terms);
 
         submit = new JButton("Submit");
         submit.setFont(new Font("Arial", Font.BOLD, 16));
         submit.setSize(120, 30);
         submit.setLocation(150, 400);
+        submit.setName("Submit");
         submit.addActionListener(this);
         c.add(submit);
 
@@ -183,11 +192,13 @@ class LoginFrame extends JFrame implements ActionListener {
         reset.setFont(new Font("Arial", Font.PLAIN, 16));
         reset.setSize(120, 30);
         reset.setLocation(300, 400);
+        reset.setName("Reset");
         reset.addActionListener(this);
         c.add(reset);
 
         c.setVisible(true);
-        this.setVisible(true);
+
+
     }
 
     /**
@@ -197,20 +208,35 @@ class LoginFrame extends JFrame implements ActionListener {
      * @param e the ActionEvent triggered by a button click
      */
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == reset) {
+            userNameField.setText("");
+            passwordField.setText("");
+            male.setSelected(true);
+            female.setSelected(false);
+            date.setSelectedIndex(0);
+            month.setSelectedIndex(0);
+            year.setSelectedIndex(0);
+            terms.setSelected(false);
+            return;
+        }
+
         String username = userNameField.getText();
         String password = passwordField.getText();
 
-        Integer accountType = Authenticator.checkLogin(username, password);
-
-        if (e.getSource() != terms) {
-            if (!terms.isSelected()) {
-                JOptionPane.showMessageDialog(this, "Please check accept terms and conditions.");
-                return;
-            }
+        if (!terms.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Please check accept terms and conditions.");
+            return;
         }
 
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Invalid username or password");
+            return;
+        }
+
+        Integer accountType = Authenticator.checkLogin(username, password);
+
         if (accountType != null) {
-            JOptionPane.showMessageDialog(null, "Login successful!");
+            JOptionPane.showMessageDialog(this, "Login successful!");
 
             // close login window
             this.dispose();
@@ -235,7 +261,8 @@ class LoginFrame extends JFrame implements ActionListener {
             }
             return; // EXIT HERE so your registration code does not run after login
         } else {
-            JOptionPane.showMessageDialog(null, "Invalid username or password");
+            JOptionPane.showMessageDialog(this, "Invalid username or password");
         }
+
     }
 }
