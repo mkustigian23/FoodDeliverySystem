@@ -28,7 +28,7 @@ class LoginFrame extends JFrame implements ActionListener {
     private JLabel userName;
     private JTextField userNameField;
     private JLabel password;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private JLabel gender;
     private JRadioButton male;
     private JRadioButton female;
@@ -113,7 +113,7 @@ class LoginFrame extends JFrame implements ActionListener {
         password.setLocation(100, 150);
         c.add(password);
 
-        passwordField = new JTextField();
+        passwordField = new JPasswordField();
         passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
         passwordField.setSize(200, 25);
         passwordField.setLocation(230, 150);
@@ -221,7 +221,7 @@ class LoginFrame extends JFrame implements ActionListener {
         }
 
         String username = userNameField.getText();
-        String password = passwordField.getText();
+        String password = new String(passwordField.getPassword());
 
         if (!terms.isSelected()) {
             JOptionPane.showMessageDialog(this, "Please check accept terms and conditions.");
