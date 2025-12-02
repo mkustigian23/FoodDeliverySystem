@@ -28,7 +28,7 @@ class AdminFrame extends JFrame implements ActionListener {
     private JLabel userName;
     private JTextField userNameField;
     private JLabel password;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private JLabel accountType;
     private JRadioButton customer;
     private JRadioButton driver;
@@ -75,7 +75,7 @@ class AdminFrame extends JFrame implements ActionListener {
         password.setLocation(150, 250);
         c.add(password);
 
-        passwordField = new JTextField();
+        passwordField = new JPasswordField();
         passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordField.setSize(400, 40);
         passwordField.setLocation(250, 250);
@@ -169,27 +169,27 @@ class AdminFrame extends JFrame implements ActionListener {
             } else if(userNameField.getText().equals("")) {
                 res.setText("Please input a" +
                         " username");
-            } else if(passwordField.getText().equals("")) {
+            } else if(passwordField.getPassword().equals("")) {
                 res.setText("Please input a" +
                         " Password");
             }else {
                 if (customer.isSelected()) {
                     try {
-                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 1);
+                        loginDAO.insert(userNameField.getText(), new String(passwordField.getPassword()), 1);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
                 if (driver.isSelected()) {
                     try {
-                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 2);
+                        loginDAO.insert(userNameField.getText(), new String(passwordField.getPassword()), 2);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
                 if (restaurant.isSelected()) {
                     try {
-                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 3);
+                        loginDAO.insert(userNameField.getText(), new String(passwordField.getPassword()), 3);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -199,7 +199,7 @@ class AdminFrame extends JFrame implements ActionListener {
                         = "Username : "
                         + userNameField.getText() + "\n"
                         + "Password : "
-                        + passwordField.getText() + "\n";
+                        + new String(passwordField.getPassword()) + "\n";
             }
         } else if (e.getSource() == reset) {
             String def = "";

@@ -31,28 +31,26 @@ public class Authenticator {
      *      - Returns null if credentials are invalid
      */
 
-        public static Integer checkLogin(String username, String password) {
-            String sql = "SELECT account_type FROM logins WHERE username = ? AND password = ?";
+    public static Integer checkLogin(String username, String password) {
+        String sql = "SELECT account_type FROM logins WHERE username = ? AND password = ?";
 
-            try (Connection conn = DatabaseManager.connect();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseManager.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-                pstmt.setString(1, username);
-                pstmt.setString(2, password);
-                ResultSet rs = pstmt.executeQuery();
+            pstmt.setString(1, username);
+            pstmt.setString(2, PasswordHash.hash(password));
 
-                if (rs.next()) {
-                    return rs.getInt("account_type");
-                } else {
-                    return null; // invalid login
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("account_type");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
     }
+
+}
 
 
 

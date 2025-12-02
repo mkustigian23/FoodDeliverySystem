@@ -83,11 +83,12 @@ public class LoginDAO {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
-            pstmt.setString(2, password);
+            pstmt.setString(2, PasswordHash.hash(password)); // <<< HASH
             pstmt.setInt(3, account_type);
             pstmt.executeUpdate();
         }
     }
+
 
     /**
      * Validates a user's login credentials against the logins table in the database
@@ -102,7 +103,7 @@ public class LoginDAO {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
-            pstmt.setString(2, password);
+            pstmt.setString(2, PasswordHash.hash(password));
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -136,25 +137,25 @@ public class LoginDAO {
 
             // Admin TYPE = 0
             pstmt.setString(1, "FoodAdmin");
-            pstmt.setString(2, "COMP390");
+            pstmt.setString(2, PasswordHash.hash("COMP390"));
             pstmt.setInt(3, 0);
             pstmt.executeUpdate();
 
             // Customer TYPE = 1
             pstmt.setString(1, "customerDemo");
-            pstmt.setString(2, "ilikefood");
+            pstmt.setString(2, PasswordHash.hash("ilikefood"));
             pstmt.setInt(3, 1);
             pstmt.executeUpdate();
 
             // Driver TYPE = 2
             pstmt.setString(1, "driverDemo");
-            pstmt.setString(2, "driving");
+            pstmt.setString(2, PasswordHash.hash("driving"));
             pstmt.setInt(3, 2);
             pstmt.executeUpdate();
 
             // Restaurant TYPE = 3
             pstmt.setString(1, "restDemo");
-            pstmt.setString(2, "restaurant");
+            pstmt.setString(2, PasswordHash.hash("restaurant"));
             pstmt.setInt(3, 3);  // ← FIXED: must be 3
             pstmt.executeUpdate();
 
