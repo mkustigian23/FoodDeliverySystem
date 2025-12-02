@@ -134,14 +134,14 @@ public class PaymentFrame extends JFrame implements ActionListener {
             CartDAO.clearCart();
             LoginDAO.logout();
 
-            // Close EVERY window except the new LoginFrame
+            // Close every window except the new LoginFrame
             for (Window w : Window.getWindows()) {
                 if (w instanceof JFrame || w instanceof JDialog) {
                     w.dispose();
                 }
             }
 
-            // Open LoginFrame AFTER all are closed
+            // Open LoginFrame after all are closed
             SwingUtilities.invokeLater(() -> {
                 new LoginFrame().setVisible(true);
             });
