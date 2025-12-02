@@ -22,8 +22,6 @@ public class Address {
     private String zipCode;
 
     private String buildingType;
-    private String buildingName;
-    private double apt;
 
     /**
      * Getter methods for retrieving address information
@@ -34,8 +32,6 @@ public class Address {
     public String getState() { return state; }
     public String getZipCode() { return zipCode; }
     public String getBuildingType() { return buildingType; }
-    public String getBuildingName() { return buildingName; }
-    public double getApt() { return apt; }
 
     /**
      * Setter methods for updating address information
@@ -45,9 +41,7 @@ public class Address {
     public void setCity(String city) { this.city = city; }
     public void setState(String state) { this.state = state; }
     public void setZipCode(String zipCode) { this.zipCode = zipCode; }
-    public void setBuildingType(String buildingType) { this.buildingType = buildingType; } 
-    public void setBuildingName(String buildingName) { this.buildingName = buildingName; }
-    public void setApt(double apt) { this.apt = apt; }
+    public void setBuildingType(String buildingType) { this.buildingType = buildingType; }
 }
 
 
