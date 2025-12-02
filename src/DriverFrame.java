@@ -103,10 +103,10 @@ public class DriverFrame extends JFrame {
      * Overloaded constructor:
      * Allows cart items and customer address to be merged into the driver dashboard
      */
-    public DriverFrame(List<Menu> cartItems) {
+    public DriverFrame(List<Menu> cartItems, Address address) {
         this(); // call the default constructor to set up UI
 
-        deliveriesModel.addElement("=== New Order from Cart ===");
+        deliveriesModel.addElement("=== New Order ===");
         if (cartItems == null || cartItems.isEmpty()) {
             deliveriesModel.addElement("No items purchased.");
         } else {
@@ -115,14 +115,12 @@ public class DriverFrame extends JFrame {
             }
         }
 
-        // Show address information for the driver
-        deliveriesModel.addElement("Delivery Address:");
-        Address address = new Address();
-        deliveriesModel.addElement(
-                address.getStreetName() + ", "
-                        + address.getCity() + ", "
-                        + address.getState() + " " + address.getZipCode()
-        );
+        // Show customer's address information for the driver
+        deliveriesModel.addElement("=== Delivery Address ===");
+        deliveriesModel.addElement("Street Name: " + address.getStreetName());
+        deliveriesModel.addElement("City: " + address.getCity());
+        deliveriesModel.addElement("State: " + address.getState());
+        deliveriesModel.addElement("Zip Code: " + address.getZipCode());
         deliveriesModel.addElement("Building Type: " + address.getBuildingType());
     }
 
@@ -181,12 +179,5 @@ public class DriverFrame extends JFrame {
         } catch (Exception e) {
             return -1;
         }
-    }
-
-    /**
-     * Optional: standalone entry point for testing DriverFrame in isolation
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(DriverFrame::new);
     }
 }
