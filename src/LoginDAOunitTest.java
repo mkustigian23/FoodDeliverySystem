@@ -22,7 +22,7 @@ public class LoginDAOunitTest {
         boolean result = loginDAO.validateLogin("customerDemo", "ilikefood");
 
         // Expected output: user should be authenticated
-        assertTrue(result, "User should be brought to the select a restaurant page");
+        assertTrue(result, "User should see Login Successful");
         assertEquals("customerDemo", LoginDAO.getCurrentUser(),
                 "Current user should be set correctly");
         assertEquals(1, LoginDAO.getCurrentAccountType(),
