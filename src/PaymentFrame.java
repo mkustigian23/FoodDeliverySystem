@@ -194,9 +194,9 @@ public class PaymentFrame extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, payment.sendReceipt());
             statusLabel.setText("Payment successful!");
 
-            // Merge cart items into DriverFrame
+            // Merge cart items into DriverFrame and include address info
             List<Menu> items = CartDAO.getItems();
-            new DriverFrame(items);
+            new DriverFrame(items, address);
 
             CartDAO.clearCart();
             dispose();
