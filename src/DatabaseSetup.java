@@ -19,6 +19,7 @@ import java.sql.Statement;
 
 public class DatabaseSetup {
     public static void main(String[] args) {
+        // Create DAO objects for interacting with the Restaurant and Menu tables
         try {
             RestaurantDAO rdao = new RestaurantDAO();
             MenuDAO mdao = new MenuDAO();

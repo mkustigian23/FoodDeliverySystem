@@ -72,18 +72,20 @@ public class CustomerFrame extends JFrame {
             });
         });
 
-
+        // Create a DAO object to interact with the restaurant database
         RestaurantDAO dao = new RestaurantDAO();
         List<Restaurant> restaurants;
         try {
+            // Attempt to fetch all restaurant records from the database
             restaurants = dao.getAll(); // fetch from database
         } catch (SQLException e) {
             e.printStackTrace();
+            // Show an error popup to the user
             JOptionPane.showMessageDialog(this, "Error loading restaurants: " + e.getMessage());
             restaurants = List.of(); // empty list if error
         }
 
-
+        // Loop through each restaurant and create a panel for it
         for (Restaurant r : restaurants) {
             JPanel panel = createRestaurantPanel(r);
             mainPanel.add(panel);

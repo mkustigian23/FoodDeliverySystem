@@ -115,6 +115,7 @@ public class MenuFrame extends JFrame {
         List<Menu> menuItems;
 
         try {
+            // Attempt to fetch all menu items for the selected restaurant
             menuItems = dao.getMenuByRestaurant(restaurantId);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,8 +144,10 @@ public class MenuFrame extends JFrame {
      * @return a JPanel representing this menu item in the UI
      */
     private JPanel createMenuItemPanel(Menu item) {
+
+        // Panel that holds everything for a single menu item
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setName("menuItem_" + item.getRestaurantId());
+        panel.setName("menuItem_" + item.getRestaurantId()); // Useful for UI testing
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         panel.setPreferredSize(new Dimension(220, 220));
         panel.setOpaque(false);
@@ -152,11 +155,13 @@ public class MenuFrame extends JFrame {
         // image
         ImageIcon icon;
         try {
+            // Load the image from the item's stored path
             icon = new ImageIcon(item.getMenu_imagePath());
         } catch (Exception e) {
             icon = new ImageIcon("src/default.png");
         }
 
+        // Scale image to fit the panel
         Image img = icon.getImage().getScaledInstance(200, 150, Image.SCALE_SMOOTH);
         JLabel imgLabel = new JLabel(new ImageIcon(img));
         imgLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -167,23 +172,26 @@ public class MenuFrame extends JFrame {
         imagePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         imagePanel.add(imgLabel);
 
-        // name + price
+        // name + price labels
         JLabel nameLabel = new JLabel(item.getName(), JLabel.CENTER);
         nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
         JLabel priceLabel = new JLabel(String.format("$%.2f", item.getPrice()), JLabel.CENTER);
         priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
 
+        // Add the components to the main panel layout
         panel.add(nameLabel, BorderLayout.NORTH);
         panel.add(imagePanel, BorderLayout.CENTER);
         panel.add(priceLabel, BorderLayout.SOUTH);
 
         panel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+        // Click to Add to Cart
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                CartDAO.addItem(item);
+                CartDAO.addItem(item); // Add this menu item to the cart
+                // Notify the user
                 JOptionPane.showMessageDialog(MenuFrame.this,
                         item.getName() + " added to cart!");
             }

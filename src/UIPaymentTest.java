@@ -23,7 +23,7 @@ public class UIPaymentTest {
     }
 
     @Test
-    public void testZipCodeTooShortShowsError() {
+    public void testCVVTooShortShowsError() {
         // Enter invalid CVV
         window.textBox("First Name").setText("John");
         window.textBox("Last Name").setText("Smith");
