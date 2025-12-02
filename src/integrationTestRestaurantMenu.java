@@ -28,11 +28,15 @@ public class integrationTestRestaurantMenu {
         menuDAO.createTable();
     }
 
+
+
     // Test 1: Menu item gets added to the restaurant
     @Test
     public void testMenuItemAddedToRestaurant() throws SQLException {
-        int restaurantId = restaurantDAO.insert("Test Restaurant", "Boston", "restaurant.png");
-        int menuItemId = menuDAO.insert(restaurantId, "Cheeseburger", 5.99, "burger.png");
+        int restaurantId = restaurantDAO.insert("Test Restaurant", "Boston",
+                "restaurant.png");
+        int menuItemId = menuDAO.insert(restaurantId, "Cheeseburger", 5.99,
+                "burger.png");
 
         List<Menu> items = menuDAO.getMenuByRestaurant(restaurantId);
         assertFalse(items.isEmpty());
@@ -42,8 +46,10 @@ public class integrationTestRestaurantMenu {
     // Test 2: User selects restaurant and adds menu item to cart
     @Test
     public void testUserSelectsRestaurantAddsMenuItemToCart() throws SQLException {
-        int restaurantId = restaurantDAO.insert("Test Restaurant", "Boston", "restaurant.png");
-        int menuItemId = menuDAO.insert(restaurantId, "Cheeseburger", 5.99, "burger.png");
+        int restaurantId = restaurantDAO.insert("Test Restaurant",
+                "Boston", "restaurant.png");
+        int menuItemId = menuDAO.insert(restaurantId, "Cheeseburger", 5.99,
+                "burger.png");
 
         List<Menu> menuItems = menuDAO.getMenuByRestaurant(restaurantId);
         Menu selectedItem = menuItems.get(0);

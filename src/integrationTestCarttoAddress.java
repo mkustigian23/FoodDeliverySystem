@@ -16,7 +16,8 @@ public class integrationTestCarttoAddress {
         DatabaseManager.useTestDatabase();
 
         // Sample menu item
-        sampleItem = new Menu(101, "Cheeseburger", 5.99, "burger.png");
+        sampleItem = new Menu(101, "Cheeseburger", 5.99,
+                "burger.png");
     }
 
     @Test

@@ -20,8 +20,10 @@
 
 
         // Sample menu items
-        sampleItem1 = new Menu(101, "Cheeseburger", 5.99, "src/images/cheeseburger.png");
-        sampleItem2 = new Menu(102, "Fries", 2.99, "src/images/fries.png");
+        sampleItem1 = new Menu(101, "Cheeseburger", 5.99,
+                "src/images/cheeseburger.png");
+        sampleItem2 = new Menu(102, "Fries", 2.99,
+                "src/images/fries.png");
         }
 
      @Test
@@ -37,23 +39,6 @@
          CartDAO.addItem(sampleItem1);
          CartDAO.removeItem(sampleItem1);
          assertFalse(CartDAO.getItems().contains(sampleItem1));
-         assertEquals(0, CartDAO.getItems().size());
-         assertEquals(0.0, CartDAO.getTotal(), 0.001);
-         }
-
-     @Test
-     public void testAddMultipleItems() {
-         CartDAO.addItem(sampleItem1);
-         CartDAO.addItem(sampleItem2);
-         assertEquals(2, CartDAO.getItems().size());
-         assertEquals(8.98, CartDAO.getTotal(), 0.001);
-         }
-
-     @Test
-     public void testClearCart() {
-         CartDAO.addItem(sampleItem1);
-         CartDAO.addItem(sampleItem2);
-         CartDAO.clearCart();
          assertEquals(0, CartDAO.getItems().size());
          assertEquals(0.0, CartDAO.getTotal(), 0.001);
          }

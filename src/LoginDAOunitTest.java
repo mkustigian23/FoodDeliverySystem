@@ -23,8 +23,10 @@ public class LoginDAOunitTest {
 
         // Expected output: user should be authenticated
         assertTrue(result, "User should be brought to the select a restaurant page");
-        assertEquals("customerDemo", LoginDAO.getCurrentUser(), "Current user should be set correctly");
-        assertEquals(1, LoginDAO.getCurrentAccountType(), "Account type should be customer (1)");
+        assertEquals("customerDemo", LoginDAO.getCurrentUser(),
+                "Current user should be set correctly");
+        assertEquals(1, LoginDAO.getCurrentAccountType(),
+                "Account type should be customer (1)");
     }
 
     @Test
@@ -34,7 +36,8 @@ public class LoginDAOunitTest {
         // Expected output: login fails
         assertFalse(result, "User should see 'Invalid username or password'");
         assertNull(LoginDAO.getCurrentUser(), "No current user should be set");
-        assertEquals(-1, LoginDAO.getCurrentAccountType(), "Account type should be reset");
+        assertEquals(-1, LoginDAO.getCurrentAccountType(),
+                "Account type should be reset");
     }
 }
 
