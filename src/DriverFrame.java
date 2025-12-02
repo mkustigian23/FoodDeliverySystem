@@ -55,6 +55,26 @@ public class DriverFrame extends JFrame {
         topPanel.add(refreshButton);
 
         add(topPanel, BorderLayout.NORTH);
+        //logout button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+
+            // Clear cart or session
+            CartDAO.clearCart();
+            LoginDAO.logout();
+
+            // Close EVERY window except the new LoginFrame
+            for (Window w : Window.getWindows()) {
+                if (w instanceof JFrame || w instanceof JDialog) {
+                    w.dispose();
+                }
+            }
+
+            // Open LoginFrame AFTER all are closed
+            SwingUtilities.invokeLater(() -> {
+                new LoginFrame().setVisible(true);
+            });
+        });
 
         // Center panel: Delivery list
         // Changed to JList so driver can click on jobs to accept them
@@ -96,6 +116,7 @@ public class DriverFrame extends JFrame {
             }
         });
 
+        add(logoutButton, BorderLayout.SOUTH);
         setVisible(true);
     }
 
