@@ -35,6 +35,7 @@ class AdminFrame extends JFrame implements ActionListener {
     private JRadioButton restaurant;
     private JButton submit;
     private JButton reset;
+    private JButton logout;
     private JLabel res;
     private JTextArea resadd;
     private LoginDAO loginDAO = new LoginDAO();
@@ -70,20 +71,20 @@ class AdminFrame extends JFrame implements ActionListener {
 
         // Password label and field
         password = new JLabel("Password");
-        password.setFont(new Font("Arial", Font.PLAIN, 20));
+        password.setFont(new Font("Ariel", Font.PLAIN, 20));
         password.setSize(200, 40);
         password.setLocation(150, 250);
         c.add(password);
 
         passwordField = new JPasswordField();
-        passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
+        passwordField.setFont(new Font("Ariel", Font.PLAIN, 15));
         passwordField.setSize(400, 40);
         passwordField.setLocation(250, 250);
         c.add(passwordField);
 
         // Account type label and radio buttons
         accountType = new JLabel("Account Type");
-        accountType.setFont((new Font("Arial", Font.PLAIN, 20)));
+        accountType.setFont((new Font("Ariel", Font.PLAIN, 20)));
         accountType.setSize(200, 40);
         accountType.setLocation(375, 300);
         c.add(accountType);
@@ -123,33 +124,28 @@ class AdminFrame extends JFrame implements ActionListener {
         reset.setLocation(450, 450);
         reset.addActionListener(this);
         c.add(reset);
-        
-        res = new JLabel("");
-        res.setFont(new Font("Arial", Font.PLAIN, 20));
-        res.setSize(500, 25);
-        res.setLocation(100, 500);
-        c.add(res);
 
+        logout = new JButton("Logout");
+        logout.setFont(new Font("Arial", Font.PLAIN, 15));
+        logout.setSize(100,20);
+        logout.setLocation(20,20);
+        logout.addActionListener(this);
+        c.add(logout);
 
+//        res = new JLabel("");
+//        res.setFont(new Font("Arial", Font.PLAIN, 20));
+//        res.setSize(500, 25);
+//        res.setLocation(100, 500);
+//        c.add(res);
+//
+//        resadd = new JTextArea();
+//        resadd.setFont(new Font("Arial", Font.PLAIN, 15));
+//        resadd.setSize(200, 75);
+//        resadd.setLocation(580, 175);
+//        resadd.setLineWrap(true);
+//        c.add(resadd);
 
-        // logout button
-        JButton logoutButton = new JButton("Logout");
-        logoutButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        logoutButton.setSize(100, 30);           // width x height
-        logoutButton.setLocation(400, 500);      // x, y position
-        logoutButton.addActionListener(e -> {
-            for (Window window : Window.getWindows()) {
-                if (window instanceof JDialog) {
-                    window.dispose();
-                }
-            }
-            new LoginDAO().logout();
-            dispose();
-            SwingUtilities.invokeLater(() -> new LoginFrame());
-        });
-        c.add(logoutButton);
-
-        setVisible(true);
+        c.setVisible(true);
     }
 
     /**
@@ -162,35 +158,35 @@ class AdminFrame extends JFrame implements ActionListener {
             // Validate account type selection
             if (customer.isSelected() && driver.isSelected() || customer.isSelected() && restaurant.isSelected() || driver.isSelected() && restaurant.isSelected()) {
                 res.setText("Please select only" +
-                        " one account type");
+                        "one account type");
             } else if (!customer.isSelected() && !driver.isSelected() && !restaurant.isSelected()) {
                 res.setText("Please select an" +
-                        " account type");
+                        "account type");
             } else if(userNameField.getText().equals("")) {
                 res.setText("Please input a" +
-                        " username");
-            } else if(passwordField.getPassword().equals("")) {
+                        "username");
+            } else if(passwordField.getText().equals("")) {
                 res.setText("Please input a" +
-                        " Password");
+                        "Password");
             }else {
                 if (customer.isSelected()) {
                     try {
-                        loginDAO.insert(userNameField.getText(), new String(passwordField.getPassword()), 1);
+                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 1);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
                 if (driver.isSelected()) {
                     try {
-                        loginDAO.insert(userNameField.getText(), new String(passwordField.getPassword()), 2);
+                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 2);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
                 if (restaurant.isSelected()) {
                     try {
-                        loginDAO.insert(userNameField.getText(), new String(passwordField.getPassword()), 3);
-                    } catch (SQLException ex) {
+                        loginDAO.insert(userNameField.getText(), passwordField.getText(), 3);
+                    } catch (SQLExceptio    n ex) {
                         throw new RuntimeException(ex);
                     }
                 }
@@ -199,16 +195,20 @@ class AdminFrame extends JFrame implements ActionListener {
                         = "Username : "
                         + userNameField.getText() + "\n"
                         + "Password : "
-                        + new String(passwordField.getPassword()) + "\n";
+                        + passwordField.getText() + "\n";
             }
         } else if (e.getSource() == reset) {
             String def = "";
             userNameField.setText(def);
             passwordField.setText(def);
+        } else if (e.getSource() == logout){
+            this.dispose();
+            LoginFrame l = new LoginFrame();
+            l.setVisible(true);
         }
 
-        }
     }
+}
 
 
 
