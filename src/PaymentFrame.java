@@ -40,7 +40,7 @@ public class PaymentFrame extends JFrame implements ActionListener {
     private Payment payment;
     private Address address;
 
-    private int total; // <-- stores the total passed in
+    private int total; //stores the total passed in
 
     /**
      * Creates the payment window where user will enter their payment info

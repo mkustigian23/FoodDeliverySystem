@@ -33,7 +33,7 @@ public class DatabaseSetup {
                 stmt.execute("DELETE FROM restaurants");
             }
 
-            // Insert restaurants once for pasta restaurant, burger place, and taco town
+            // Insert restaurants once for pasta restaurant, burger place, and mexican Restaurant
             int pastaId = rdao.insert("Pasta Restaurant", "100 Main Street", "src/pasta.png");
             int burgerId = rdao.insert("Burger Place", "45 West Street", "src/burger.png");
             int tacoId   = rdao.insert("Mexican Restaurant", "34 Grove Street", "src/taco.png");
@@ -52,7 +52,7 @@ public class DatabaseSetup {
             mdao.insert(burgerId, "Milk Shake", 6.00, "src/milkShake.png");
 
 
-            // Insert menu for the taco restaurant
+            // Insert menu for the mexican restaurant
             mdao.insert(tacoId, "Beef Taco", 15.00, "src/beef.png");
             mdao.insert(tacoId, "Chicken Taco", 17.00, "src/chicken.png");
             mdao.insert(tacoId, "Burrito", 16.00, "src/burrito.png");
