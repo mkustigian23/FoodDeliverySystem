@@ -186,7 +186,7 @@ class AdminFrame extends JFrame implements ActionListener {
                 if (restaurant.isSelected()) {
                     try {
                         loginDAO.insert(userNameField.getText(), passwordField.getText(), 3);
-                    } catch (SQLExceptio    n ex) {
+                    } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
